@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Tests</title>
+    <link rel="stylesheet" href="qunit.css">
+
+<script src="../assets/js/libs/qunit/qunit.js"></script>
+<script src="../assets/js/libs/jquery/jquery.js"></script>
+<script src="../assets/js/libs/lodash/lodash.js"></script>
+<script src="../assets/js/libs/backbone/backbone.js"></script>
+
+</head>
+<body>
+
+    <div id="qunit"></div>
+
+
+    <!-- RequireJS -->
+    <script data-main="../scripts/config.js" src="../assets/js/libs/require/require.js"></script>
+
+    <!-- Load our unit tests -->
+    <script>
+        require({paths: {tests: '../tests/units'}},[
+            // Load tests here
+            'tests/main'
+        ]);
+    </script>
+
+</body>
+</html>

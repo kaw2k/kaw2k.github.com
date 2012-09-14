@@ -10,12 +10,29 @@ module.exports = function(grunt) {
         },
 
         watch: {
-            files: '<config:lint.files>',
-            tasks: 'lint qunit'
+            files: ['<config:lint.files>', 'assets/templates/*.md'],
+            tasks: 'lint qunit exec'
+        },
+
+        exec: {
+            // Removes the contents of the pages directory
+            //remove_pages: {
+                //command: 'rm ./assets/pages/*'
+            //},
+
+            // Runs our build script
+            run_build: {
+                command: 'node scripts/build.js',
+                stdout: true
+            }
         }
 
     });
 
     // Default task.
-    grunt.registerTask('default', 'lint qunit');
+    grunt.registerTask('default', 'watch');
+
+
+    // Load NPM tasks
+    grunt.loadNpmTasks('grunt-exec');
 };

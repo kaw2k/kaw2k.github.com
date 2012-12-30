@@ -1,0 +1,21 @@
+<data>
+{
+    "urlName": "index",
+    "urlPath": "posts/"
+}
+</data>
+
+<js>
+this.posts = _.chain(site.posts).toArray().value();
+</js>
+
+<h1>Posts</h1>
+
+{{#posts}}
+    <hgroup>
+        <a href="/{{urlFull}}">
+            <h2>{{title}}</h2>
+            <time>{{date}}</time>
+        </a>
+    </hgroup>
+{{/posts}}

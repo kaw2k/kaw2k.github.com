@@ -13,17 +13,20 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic|Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
     <!-- Styling and Profilin -->
-    <link href="/css/tomorrow.css" type="text/css" rel="stylesheet" />
-    <link href="/css/styles.css" type="text/css" rel="stylesheet" />
+    <link href="/assets/css/tomorrow.css" type="text/css" rel="stylesheet" />
+    <!--<link href="/css/styles.css" type="text/css" rel="stylesheet" />-->
 
     <!-- Less Styles -->
-    <!--<link rel="stylesheet/less" type="text/less" href="less/bootstrap.less">-->
-    <!--<script src="js/vendor/less.js"></script>-->
+    <link rel="stylesheet/less" type="text/less" href="/assets/less/bootstrap.less">
+    <script src="/assets/js/vendor/less.js"></script>
 
     <!-- Modernizer -->
-    <script src="/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script src="/assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
-<body onload="prettyPrint()"><div class="container">
+<body onload="prettyPrint()">
+<div class="container">
+
+
 
 
 <section class="sidebar">
@@ -31,10 +34,10 @@
         <a class="logo" href="/"><span class="kaw"><span class="cap">k</span>aw</span><span class="dev"><span class="cap">d</span>ev</span></a>
         <nav>
             <ul>
-                <li><a href="/">BlogRoll</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Videos</a></li>
-                <li><a href="https://github.com/kaw2k">Github</a></li>
+                <li><a href="/posts/">Posts</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/videos.html">Videos</a></li>
+                <li><a href="https://github.com/kaw2k">GitHub</a></li>
             </ul>
         </nav>
     </div>
@@ -42,36 +45,28 @@
 
 
 <section class="main">
+    
+    <h1>Videos</h1>
 
-    <h1>Blog Roll</h1>
-
-        <hgroup>
-        <a href="posts&#x2F;test.html">
-                <h2>H1: Blog post title</h2>
-                <time>October 3, 2012</time>
-            </a>
-        </hgroup>
-        <hgroup>
-        <a href="posts&#x2F;second-blog-post.html">
-                <h2>This is the second blog post</h2>
-                <time>November 27, 2012</time>
-            </a>
-        </hgroup>
+    <p>Nothing to see here...
+</p>
 
 
 </section><!-- main -->
 
+
+</div><!-- container -->
 <!-- jQuery -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script>
-    window.jQuery || document.write('<script src="&#x2F;kaw2k.github.com&#x2F;js/vendor/jquery-1.8.3.min.js"><\/script>')
+    window.jQuery || document.write('<script src="js/vendor/jquery-1.8.3.min.js"><\/script>')
 </script>
 
 <!-- Prettify Dat Code -->
-<script src="/js/vendor/prettify/prettify.js"></script>
+<script src="/assets/js/vendor/prettify/prettify.js"></script>
 
 <!-- Scripts -->
-<script src="/js/main.js"></script>
+<script src="/assets/js/main.js"></script>
 <script> $('code, pre').addClass('prettyprint'); </script>
 
 
@@ -83,6 +78,6 @@
     s.parentNode.insertBefore(g,s)}(document,'script'));
 </script>
 
-</div></body>
+</body>
 </html>
 

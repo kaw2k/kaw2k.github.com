@@ -1,0 +1,482 @@
+// Sizes
+@copy: 18px;
+//@magic: 1.75 * @copy;
+@magic: 30px;
+
+@h1: 30px;
+@h2: 22px;
+@h3: 20px;
+@h4: 18px;
+@h5: @copy;
+@h6: @copy;
+
+@lightGray: #a19c91;
+
+// Colors
+@primary: #2D3A4A;
+@secondary: #3181a4;
+@saccent: #005f6b;
+@ternary: #333;
+@taccent: #444;
+
+// Applied Colors
+@strongColor: @primary;
+@emColor: @primary;
+
+@hr: #e4e4e4;
+
+/*@a: @secondary;*/
+@a: #e46242;
+@aHover: darken(@a, 15%);
+
+@blockquoteBorder: #ccc;
+
+// Crude Reset
+*, *:after, *:before { 
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+
+
+// Text Sizing
+p, .p {
+    font-size: @copy;
+    line-height: @magic;
+    margin-bottom: @magic;
+    /*font-weight: 300;*/
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+    margin-bottom: @magic;
+    font-family: "Helvetica Neue";
+    text-transform: uppercase;
+    font-weight: 400;
+}
+h1, .h1 {
+    font-size: @h1;
+    line-height: @magic;
+    /*font-weight: 300;*/
+}
+h2, .h2 {
+    font-size: @h2;
+    line-height: @magic;
+}
+h3, .h3 {
+    font-size: @h3;
+    line-height: @magic;
+    text-transform: none;
+}
+h4, .h4 {
+    font-size: @h4;
+    line-height: @magic;
+    text-transform: none;
+}
+h5, .h5 {
+    font-size: @h5;
+    line-height: @magic;
+    text-transform: none;
+}
+h6, .h6 {
+    font-size: @h6;
+    line-height: @magic;
+    text-transform: none;
+}
+
+time, .time {
+    font-size: @copy * 0.8;
+    font-weight: 500;
+    line-height: @magic;
+    color: @lightGray;
+}
+a, .a {
+    display: inline-block;
+
+    font-size: inherit;
+    font-weight: 400;
+
+    text-decoration: none;
+    
+    margin: 0x;
+    /*padding: 3px;*/
+    line-height: @copy;
+
+    /*.border-radius(2px);*/
+
+    /*color: white;*/
+    /*background: @a;*/
+    color: @a;
+
+    .transition(all, 0.3s, ease-out);
+
+    &:hover {
+        color: @aHover;
+        /*background: @aHover;*/
+        /*.border-radius(4px);*/
+    }
+}
+
+
+
+blockquote {
+    line-height: @magic;
+    margin-bottom: @magic;
+
+    width: 750px;
+    
+    border-left: 5px solid @blockquoteBorder;
+    padding-left: 25px;
+
+    p {
+        font-size: @copy * 1.1;
+    }
+
+    b {
+        font-size: @copy * 0.9;
+        color: darken(#ccc, 10%);
+        font-weight: 400;
+        text-indent: 0;
+        display: block;
+    }
+}
+
+// Flavoring
+strong, .strong {
+    font-weight:600;
+    color: @strongColor;
+}
+
+em, .em {
+    color: @emColor;
+    font-weight: 400;
+}
+
+
+// Code stuff
+pre {
+    border: 1px solid #e3e3e3 !important;
+    padding: @magic / 2 !important;
+    font-size: @copy * 0.9 !important;
+    margin-bottom: @magic !important;
+    /*background: ghostwhite !important;*/
+    line-height: @magic !important;
+    .border-radius();
+
+    code {
+        border: none;
+        background: none;
+        padding: 0;
+    }
+}
+
+code {
+    border: 1px solid #eee;
+    background: ghostwhite;
+    padding: 2px;
+    .border-radius();
+}
+
+
+hr {
+    padding: 0;
+    border: none;
+    border-top: medium double @hr;
+    color: darken(@hr, 20%);
+    text-align: center;
+
+    .transition();
+
+    cursor: pointer;
+
+    &:hover {
+        color: darken(@hr, 30%);
+        border-top-color: darken(@hr, 10%);
+    }
+
+    &:after {
+        content: "§";
+        display: inline-block;
+        position: relative; 
+        top: -0.7em;  
+        font-size: 1.5em;
+        padding: 0 0.25em;
+        background: white;
+    }
+}
+
+// Lists
+ul, ol {
+    margin-bottom: @magic;
+}
+ul {
+    list-style: none;
+    line-height: @magic;
+}
+
+// POSTS
+.post {
+
+    margin-bottom: 2*@magic;
+
+    & > p:first-of-type {
+        font-size: 1.1 * @copy;
+        line-height: @magic;
+        margin-bottom: @magic;
+    }
+
+    hgroup {
+        /*position: relative;*/
+        /*left: -@magic;*/
+
+        h1+time {
+            position: relative;
+            top: -@magic;
+
+            display: block;
+            /*border-bottom: 3px solid rgba(0,0,0,0.05);*/
+
+            color: #333;
+        }
+
+    }
+}
+
+
+
+
+// BONES
+html {
+    background: #fff;
+    font-size: 62.5%;
+
+    /*width: 1020px;*/
+    /*height: 100%;*/
+    /*margin: 2 * @magic  auto 0;*/
+    /*position: relative;*/
+
+    &:hover {
+        /*background: url('../img/grid.png') 5px top repeat-y #fff;*/
+        /*background: url('../img/grid30.png') -10px top repeat-y #fff;*/
+        /*background: url('../img/30.png');*/
+    }
+}
+
+body {
+    font-family: "Open Sans", Lato, serif;
+    /*font-family: Lato, serif;*/
+    font-weight: 300;
+    color: #333;
+
+    height: 100%;
+
+    padding-top: @magic;
+
+    //overflow: hidden;
+}
+
+
+.main, .sidebar .wrapper {
+    margin-top: @magic;
+    width: 780px;
+    margin: 0 auto;
+}
+
+.main {
+
+    hgroup {
+        position: relative;
+        margin: @magic 0 0 0;
+
+        a {
+            color: #333;
+        }
+
+        h2 {
+            text-transform: none;
+        }
+
+        /*&:hover a h2, &:hover a time {*/
+            /*font-weight: 800;*/
+        /*}*/
+
+        a time {
+            position: absolute;
+            top: 0; right: 0;
+        }
+    }
+}
+
+.sidebar {
+    background: ghostwhite;
+
+    font-size: @copy;
+
+    padding: @magic 0;
+    margin-bottom: 2*@magic;
+
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+
+    ul {
+        margin: 0;
+    }
+    
+
+    .logo, li, a, nav {
+        display: inline-block;
+        background: transparent;
+        color: #333;
+        font-family: Lato;
+
+        .kaw { font-weight: 800 }
+        .dev { font-weight: 400; color: @a;}
+    }
+
+    li {
+        padding-right: @copy/2;
+        a {
+            font-weight: 300;
+            color: @lightGray;
+        
+            &:hover { color: #333; }
+            &.active { 
+                font-weight: 400 !important;
+                color: #333;
+            }
+        }
+    }
+
+
+    .logo {
+        font-size: @copy+2;
+        font-variant: small-caps;
+        padding-right: @copy/2;
+
+        .cap {
+            font-size: 1.3em;
+        }
+    }
+}
+
+
+
+// Old 2
+/*.sidebar {*/
+    /*position: fixed;*/
+    /*top: 0px; left: 0; right: 0;*/
+    /*height: 40px;*/
+
+    /*z-index: 1000;*/
+
+    /*background: #5D4157;*/
+
+    /*font-size: @copy;*/
+    /*font-family: Lato;*/
+
+    /*ul {*/
+        /*margin: 0;*/
+    /*}*/
+
+    /*li, .logo, a {*/
+        /*float: left;*/
+        /*background: transparent;*/
+        /*color: white;*/
+        /*line-height: 35px;*/
+    /*}*/
+
+    /*.wrapper {*/
+        /*width: 780px;*/
+
+        /*margin: 0 auto;*/
+    /*}*/
+/*}*/
+
+
+
+
+
+
+
+
+
+
+// Old 1
+/*.container, .main {*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+    /*padding: 0 30px;*/
+/*}*/
+
+/*.container {*/
+    /*position: relative;*/
+    /*left: 0px;*/
+/*}*/
+
+/*.sidebar, .main {*/
+    /*.transition(all, 0.3s, ease-out);*/
+/*}*/
+
+/*@sidebarWidth: 240px;*/
+/*.sidebar {*/
+    /*background: #f1103a;*/
+    /*width: @sidebarWidth;*/
+    /*height: 100%;*/
+    /*position: fixed;*/
+    /*z-index: 1000;*/
+    /*top: 0; left: 0;*/
+    /*text-shadow: 0 1px 1px rgba(0,0,0,0.1);*/
+
+    /*position: absolute;*/
+    /*left: -@sidebarWidth;*/
+/*}*/
+/*.slideCenter {left: 0}*/
+/*.slideRight {left: @sidebarWidth;}*/
+
+/*.main {*/
+    /*position: relative;*/
+/*}*/
+
+/*.main:before,*/
+/*.main:after {*/
+    /*content: '';*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*width: 100%;*/
+    /*height: 20px;*/
+    /*z-index: 100;*/
+    /*pointer-events: none;*/
+    /*background: */
+        /*-webkit-linear-gradient(*/
+            /*to bottom, */
+            /*rgba(255,255,255,1) 0%, */
+            /*rgba(255,255,255,0) 100%*/
+        /*);*/
+    /*}*/
+
+/*.main:after {*/
+    /*top: auto;*/
+    /*bottom: 0;*/
+    /*background: */
+    /*-webkit-linear-gradient(*/
+            /*to top, */
+            /*rgba(255,255,255,1) 0%, */
+            /*rgba(255,255,255,0) 100%*/
+        /*);*/
+/*}*/
+
+/*.logo {*/
+    /*font-size: @copy * 1.2;*/
+    /*line-height: @magic;*/
+
+    /*font-family: "Open Sans";*/
+    /*font-weight: 600;*/
+
+    /*.cap { */
+        /*font-size: 1.5em;*/
+        /*font-variant: small-caps;*/
+    /*}*/
+/*}*/

@@ -9,9 +9,12 @@
 
 This is the first post in a series about building a static site compiler in NodeJS. If you want to view the rest, visit the [Static Site Compiler](#) tag. This post will define what we want to accomplish and plan the layout of the engine.
 
+aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaaa
+
 ## Motivation and other tools
 
 There are plenty of static site compilers floating around the internet such as GitHub's [Jekyll](#) and [The desktop one I think its called hammer or anvil](#). They all have their perks and drawbacks. When I decided to build this site, I thought it would be a good learning experience to roll my own version. It will incorporate some of the nicer aspects of the other popular engines with the added benefit of being extremely lightweight and unobtrusive. (probably change this more)
+
 
 ## Specifications and Objectives
 
@@ -38,23 +41,13 @@ There are plenty of static site compilers floating around the internet such as G
 - Pages and Posts should live in the same list, you just filter them to get what you want
 
 ## Assumptions
+
 - Reading in a folder gives a default layout to all files within the folder. If the folder ends in 's/' (ie: anything plural) the trailing 's/' will be removed. For example, the 'posts/' folder will give a default layout of 'post'
 - Using Mustache.js for templates
 - Using less for css (or plain css)
 - All css / less will be compiled into one file as "styles.css". It will be available in 'css/styles.css'
 - The assets folder will be copied over untouched to the public folder
 - All folders will end in a / except the root folder ???
-
-## Folder Structure
-
-    /
-        settings.js
-        assets/
-        posts/
-        pages/
-        layouts/
-        partials/
-        scripts/
 
 ## Object Structure
 
@@ -63,7 +56,7 @@ There are plenty of static site compilers floating around the internet such as G
 - name: The trimmed name 'test'
 - extension: The trimmed extension 'md'
 - rawFile: A saved veresion of the raw file
-- file: The file as it gets processed
+- file: The file as it gts processed
 - layout: Defaults to index if not specified by the file
 - title: The title of the post
 - date: The date of the post

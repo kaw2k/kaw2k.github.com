@@ -6,7 +6,10 @@
 
 
 <js>
-this.posts = _.chain(site.posts)
+	this.posts = _.chain(site.pages)
+                .filter(function(page) {
+                    return page.type === 'post';
+                })
                 .sortBy(site.posts, function(i) { return -dateValue(i.date); })
                 .toArray()
                 .first(2)

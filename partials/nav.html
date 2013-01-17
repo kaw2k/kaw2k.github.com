@@ -1,14 +1,26 @@
+<js>
+    this.nav = [
+        {url: '/posts/', link: 'Posts'},
+        {url: '/about.html', link: 'About'},
+        {url: '/videos.html', link: 'Videos'},
+        {url: 'https://github.com/kaw2k', link: 'GitHub'}
+    ];
 
+    _.each(this.nav, function(el) {
+        if(this.navActive && el.link === this.navActive) {
+            el.active = true;
+        }
+    }, this);
+</js>
 
 <section class="sidebar">
     <div class="wrapper">
         <a class="logo" href="/"><span class="kaw"><span class="cap">k</span>aw</span><span class="dev"><span class="cap">d</span>ev</span></a>
         <nav>
             <ul>
-                <li><a href="/posts/">Posts</a></li>
-                <li><a href="/about.html">About</a></li>
-                <li><a href="/videos.html">Videos</a></li>
-                <li><a href="https://github.com/kaw2k">GitHub</a></li>
+                {{#nav}}
+                <li><a {{#active}}class="active"{{/active}} href="{{url}}">{{link}}</a></li>
+                {{/nav}}
             </ul>
         </nav>
     </div>

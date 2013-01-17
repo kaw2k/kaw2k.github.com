@@ -1,7 +1,8 @@
 <data>
 {
     "title": "About",
-    "urlPath": ""
+    "urlPath": "",
+    "navActive": "About"
 }
 </data>
 

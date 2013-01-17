@@ -1,12 +1,22 @@
 <data>
 {
     "urlName": "index",
-    "urlPath": "posts/"
+    "urlPath": "posts/",
+    "navActive": "Posts"
 }
 </data>
 
 <js>
-this.posts = _.chain(site.posts).toArray().value();
+	this.posts = _.chain(site.pages)
+                .filter(function(page) {
+                    return page.type === 'post';
+                })
+                .toArray()
+                .sortBy(function(post) {
+                    return -dateValue(post.date);
+                })
+                .first(2)
+                .value();
 </js>
 
 <h1>Posts</h1>

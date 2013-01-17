@@ -19,7 +19,9 @@ module.exports = function(grunt) {
                 'partials/*.html',
 
                 'posts/*.md',
-                'posts/*.html'
+                'posts/*.html',
+
+                '*.js'
             ],
             tasks: 'exec'
         },
@@ -39,7 +41,7 @@ module.exports = function(grunt) {
     });
 
     // Default task.
-    grunt.registerTask('default', 'server watch');
+    grunt.registerTask('default', 'exec server watch');
 
     // Import tasks
     grunt.loadNpmTasks('grunt-exec');

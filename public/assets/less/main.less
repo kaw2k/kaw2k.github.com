@@ -1,0 +1,412 @@
+// Sizes
+@copy: 16px;
+//@magic: 1.75 * @copy;
+@magic: 24px;
+
+@h1: 28px;
+@h2: 22px;
+@h3: 20px;
+@h4: 18px;
+@h5: @copy;
+@h6: @copy;
+
+@lightGray: #a19c91;
+
+// Colors
+@primary: #2D3A4A;
+@secondary: #3181a4;
+@saccent: #005f6b;
+@ternary: #333;
+@taccent: #444;
+
+// Applied Colors
+@strongColor: @primary;
+@emColor: @primary;
+
+@hr: #e4e4e4;
+
+/*@a: @secondary;*/
+@a: #e46242;
+@aHover: darken(@a, 15%);
+
+@blockquoteBorder: #ccc;
+
+// Crude Reset
+*, *:after, *:before { 
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+
+
+// Text Sizing
+p, .p {
+    font-size: @copy;
+    line-height: @magic;
+    margin-bottom: @magic;
+    /*font-weight: 300;*/
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+    margin-bottom: @magic;
+    font-family: "Helvetica Neue";
+    text-transform: uppercase;
+    font-weight: 400;
+}
+h1, .h1 {
+    font-size: @h1;
+    line-height: @magic;
+    /*font-weight: 300;*/
+}
+h2, .h2 {
+    font-size: @h2;
+    line-height: @magic;
+}
+h3, .h3 {
+    font-size: @h3;
+    line-height: @magic;
+    text-transform: none;
+}
+h4, .h4 {
+    font-size: @h4;
+    line-height: @magic;
+    text-transform: none;
+}
+h5, .h5 {
+    font-size: @h5;
+    line-height: @magic;
+    text-transform: none;
+}
+h6, .h6 {
+    font-size: @h6;
+    line-height: @magic;
+    text-transform: none;
+}
+
+time, .time {
+    font-size: @copy * 0.8;
+    font-weight: 500;
+    line-height: @magic;
+    color: @lightGray;
+}
+a, .a {
+    display: inline-block;
+
+    font-size: inherit;
+    font-weight: 400;
+
+    text-decoration: none;
+    
+    margin: 0x;
+    /*padding: 3px;*/
+    line-height: @copy;
+
+    /*.border-radius(2px);*/
+
+    /*color: white;*/
+    /*background: @a;*/
+    color: @a;
+
+    .transition(all, 0.3s, ease-out);
+
+    &:hover {
+        color: @aHover;
+        /*background: @aHover;*/
+        /*.border-radius(4px);*/
+    }
+}
+
+
+
+blockquote {
+    line-height: @magic;
+    margin-bottom: @magic;
+
+    /*width: 750px;*/
+    
+    border-left: 5px solid @blockquoteBorder;
+    padding-left: 25px;
+
+    p {
+        font-size: @copy * 1.1;
+    }
+
+    b {
+        font-size: @copy * 0.9;
+        color: darken(#ccc, 10%);
+        font-weight: 400;
+        text-indent: 0;
+        display: block;
+    }
+}
+
+// Flavoring
+strong, .strong {
+    font-weight:600;
+    color: @strongColor;
+}
+
+em, .em {
+    color: @emColor;
+    font-weight: 400;
+}
+
+
+// Code stuff
+pre {
+    border: 1px solid #e3e3e3 !important;
+    padding: @magic / 2 !important;
+    font-size: @copy * 0.9 !important;
+    margin-bottom: @magic !important;
+    /*background: ghostwhite !important;*/
+    line-height: @magic !important;
+    .border-radius();
+
+    code {
+        border: none;
+        background: none;
+        padding: 0;
+    }
+}
+
+code {
+    border: 1px solid #eee;
+    background: ghostwhite;
+    padding: 2px;
+    .border-radius();
+
+    line-height: 0px;
+    font-size: @copy - 2;
+}
+
+
+hr {
+    padding: 0;
+    border: none;
+    border-top: medium double @hr;
+    color: darken(@hr, 20%);
+    text-align: center;
+
+    .transition();
+
+    cursor: pointer;
+
+    line-height: 0px;
+    font-size: @copy - 2;
+
+    &:hover {
+        color: darken(@hr, 30%);
+        border-top-color: darken(@hr, 10%);
+    }
+
+    &:after {
+        content: "§";
+        display: inline-block;
+        position: relative; 
+        top: -0.7em;  
+        font-size: 1.5em;
+        padding: 0 0.25em;
+        background: white;
+    }
+}
+
+// Lists
+ul, ol {
+    font-size: @copy;
+    margin-bottom: @magic;
+    line-height: @magic;
+    margin-left: 25px;
+}
+ul {
+    list-style: disc;
+}
+
+// POSTS
+.post {
+
+    margin-bottom: 2*@magic;
+
+    & > p:first-of-type {
+        font-size: 1.1 * @copy;
+        line-height: @magic;
+        margin-bottom: @magic;
+    }
+
+    hgroup {
+        /*position: relative;*/
+        /*left: -@magic;*/
+
+        h1+time {
+            position: relative;
+            top: -@magic;
+
+            display: block;
+            /*border-bottom: 3px solid rgba(0,0,0,0.05);*/
+
+            color: #333;
+        }
+
+    }
+}
+
+
+// BONES
+html {
+    background: #fff;
+    font-size: 62.5%;
+
+    /*width: 1020px;*/
+    /*height: 100%;*/
+    /*margin: 2 * @magic  auto 0;*/
+    /*position: relative;*/
+
+    &:hover {
+        /*background: url('../img/grid.png') 5px top repeat-y #fff;*/
+        /*background: url('../img/grid30.png') -10px top repeat-y #fff;*/
+        /*background: url('../img/30.png');*/
+        /*background: url('../img/24.png');*/
+    }
+}
+
+body {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, serif;
+    /*font-family: "Helvetica Neue", Lato, serif;*/
+    /*font-family: Lato, serif;*/
+    font-weight: 300;
+    color: #333;
+
+    height: 100%;
+
+    padding-top: @magic;
+
+    /*background: url('http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/debut_light.png');*/
+
+    //overflow: hidden;
+}
+
+
+li {
+    /*margin-bottom: @magic/2;*/
+}
+
+.main, .sidebar .wrapper {
+    margin-top: @magic;
+    width: 600px;
+    margin: 0 auto;
+}
+
+.main {
+
+    /*text-shadow: 0 1px 0 white;*/
+
+    hgroup {
+        position: relative;
+        margin: @magic 0 0 0;
+
+        a {
+            color: #333;
+        }
+
+        h2 {
+            text-transform: none;
+        }
+
+        /*&:hover a h2, &:hover a time {*/
+            /*font-weight: 800;*/
+        /*}*/
+
+        a time {
+            position: absolute;
+            top: 0; right: 0;
+        }
+    }
+}
+
+.sidebar {
+    /*background: url('http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/debut_dark.png');*/
+
+    /*background: rgba(0,0,0,0.1);*/
+    /*border-bottom: 5px solid rgba(255,255,255,0.5);*/
+
+    font-size: @copy;
+
+    padding: @magic 0;
+
+    /*margin-bottom: 2*@magic;*/
+
+    /*border-bottom: 1px solid #eee;*/
+    /*border-top: 1px solid #eee;*/
+
+    ul {
+        margin: 0;
+    }
+    
+
+    .logo, li, a, nav {
+        display: inline-block;
+        background: transparent;
+        color: #333;
+        font-family: Lato;
+
+        .kaw { font-weight: 800 }
+        .dev { font-weight: 400; color: @a;}
+    }
+
+    li {
+        padding-right: @copy/2;
+        a {
+            font-weight: 300;
+            color: @lightGray;
+        
+            &:hover { color: #333; }
+            &.active { 
+                font-weight: 400 !important;
+                color: #333;
+            }
+        }
+    }
+
+
+    .logo {
+        font-size: @copy+2;
+        font-variant: small-caps;
+        padding-right: @copy/2;
+
+        .cap {
+            font-size: 1.3em;
+        }
+    }
+}
+
+hgroup {
+    margin-bottom: 24px;
+}
+
+.img {
+    display: block;
+   
+    width: 400px;
+    margin: 0 auto @magic * 2;
+
+    border: 1px solid #ddd;
+
+    -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.055);
+    -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.055);
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.055);
+
+    .dropShadow();
+    .transition();
+
+    &:hover {
+        -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.55);
+        -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.55);
+        box-shadow: 0px 1px 3px rgba(0,0,0,0.55);
+    }
+
+    img {
+        width: 398px;
+    }
+}

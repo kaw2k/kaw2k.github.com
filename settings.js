@@ -5,8 +5,5 @@ site.settings = {
     developmentUrl: '/',
     productionUrl: '/',
 
-    developmentBranch: 'source',
-    productionBranch: 'master',
-
     trimHTML: false
 }

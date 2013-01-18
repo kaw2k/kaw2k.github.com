@@ -385,16 +385,28 @@ hgroup {
     margin-bottom: 24px;
 }
 
-/*h1:before {*/
-    /*content: '';*/
-    /*position: absolute;*/
-    /*left: 0;*/
-    /*margin-top: -48px;                */
-    /*width: 100%;*/
-    /*height: 96px;*/
+.img {
+    display: block;
+   
+    width: 400px;
+    margin: 0 auto @magic * 2;
 
-    /*background: rgba(0,0,0,0.1);*/
+    border: 1px solid #ddd;
 
-    /*border-top: 5px solid rgba(255,255,255,0.5);*/
-    /*border-bottom: 5px solid rgba(255,255,255,0.5);*/
-/*}*/
+    -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.055);
+    -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.055);
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.055);
+
+    .dropShadow();
+    .transition();
+
+    &:hover {
+        -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.55);
+        -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.55);
+        box-shadow: 0px 1px 3px rgba(0,0,0,0.55);
+    }
+
+    img {
+        width: 398px;
+    }
+}

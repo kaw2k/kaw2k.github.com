@@ -60,7 +60,7 @@
 
 </p>
 <h2>Motivation</h2>
-<p>There are plenty of static site compilers floating around the internet such as GitHub&#39;s <a href="#">Jekyll</a> and <a href="#">The desktop one I think its called hammer or anvil</a>. They all have their perks and drawbacks. When I decided to build this site, I thought it would be a good learning experience to roll my own version. It will incorporate some of the nicer aspects of the other popular engines with the added benefit of being extremely lightweight and unobtrusive. <strong>(more)</strong>
+<p>There are plenty of static site compilers floating around the internet such as GitHub&#39;s <a href="https://github.com/mojombo/jekyll">Jekyll</a> and <a href="http://hammerformac.com/">Hammer for Mac</a>. They all have their perks and drawbacks. When I decided to build this site, I thought it would be a good learning experience to roll my own version. It will incorporate some of the nicer aspects of the other popular engines with the added benefit of being extremely lightweight and unobtrusive. <strong>(more)</strong>
 
 
 </p>
@@ -133,11 +133,16 @@
 
 
 <!-- Google Analytics -->
-<script>
-    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-    s.parentNode.insertBefore(g,s)}(document,'script'));
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28018916-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 </script>
 
 </body>

@@ -56,13 +56,22 @@
             <h1>Introducing SSC.JS</h1>
         </hgroup>
 
-        <p>This is the first post in a series about building a static site compiler in NodeJS. If you want to view the rest, visit the <a href="#">Static Site Compiler</a> tag. This post will define what we want to accomplish and plan the layout of the engine.
+        <p>SSC is a simple static website compiler. I started this project when I wanted to make a simple, static website. I considered using <a href="#">Jekyll</a>, but I wanted something a bit simpler. I also considered using <a href="#">Hammer</a>, but not at the cost of spending money. I figured this was a good time to learn, and decided to role my own compiler.
 
 </p>
-<h2>Motivation</h2>
-<p>There are plenty of static site compilers floating around the internet such as GitHub&#39;s <a href="#">Jekyll</a> and <a href="#">The desktop one I think its called hammer or anvil</a>. They all have their perks and drawbacks. When I decided to build this site, I thought it would be a good learning experience to roll my own version. It will incorporate some of the nicer aspects of the other popular engines with the added benefit of being extremely lightweight and unobtrusive. <strong>(more)</strong>
+<p>So what does SSC do?
 
 </p>
+<h3>Features</h3>
+<ul>
+<li>Partials</li>
+<li>Dynamic &quot;Server Side&quot; Javascript</li>
+<li>Layouts</li>
+<li>Mustache Templates</li>
+<li>Markdown Compilation</li>
+<li>Git / GitHub Pages Integration</li>
+<li>Bootstrap From the Start</li>
+</ul>
 
 
     </section>
@@ -85,11 +94,16 @@
 
 
 <!-- Google Analytics -->
-<script>
-    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-    s.parentNode.insertBefore(g,s)}(document,'script'));
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28018916-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 </script>
 
 </body>

@@ -9,7 +9,7 @@
 <js>
 	this.posts = _.chain(site.pages)
                 .filter(function(page) {
-                    return page.type === 'post';
+                    return page.type === 'post' && !page.hidden;
                 })
                 .toArray()
                 .sortBy(function(post) {

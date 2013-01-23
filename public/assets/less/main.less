@@ -3,6 +3,8 @@
 //@magic: 1.75 * @copy;
 @magic: 24px;
 
+@siteWidth: 600px;
+
 @h1: 28px;
 @h2: 22px;
 @h3: 20px;
@@ -43,11 +45,15 @@
 
 
 // Text Sizing
-p, .p {
+p, .p, strong, .strong, em, .em {
     font-size: @copy;
     line-height: @magic;
     margin-bottom: @magic;
     /*font-weight: 300;*/
+}
+
+strong, .strong {
+    font-weight: 500;
 }
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
@@ -294,13 +300,15 @@ li {
 
 .main, .sidebar .wrapper {
     margin-top: @magic;
-    width: 600px;
+    width: @siteWidth;
     margin: 0 auto;
 }
 
 .main {
 
     /*text-shadow: 0 1px 0 white;*/
+
+    margin-bottom: @magic*2;
 
     hgroup {
         position: relative;
@@ -409,4 +417,33 @@ hgroup {
     img {
         width: 398px;
     }
+}
+
+iframe {
+    width: 560px;
+    margin: 0 auto @magic;
+}
+
+[class*='col-'] {
+    float: left;
+    padding-right: 20px;
+}
+
+[class*='col-']+:not([class*='col-']) {
+    clear: both
+}
+
+[class*='col-']:last-of-type {
+    padding-right: 0px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: block;
+}
+
+
+
+.col-1-2 {
+    /*width: @siteWidth/2 - 2px; */
+    width: @siteWidth/2;
 }

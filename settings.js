@@ -5,5 +5,5 @@ site.settings = {
     developmentUrl: '/',
     productionUrl: '/',
 
-    trimHTML: false
+    trimHTML: true
 }

@@ -8,7 +8,7 @@
 <js>
 	this.posts = _.chain(site.pages)
                 .filter(function(page) {
-                    return page.type === 'post';
+                    return page.type === 'post' && !page.hidden;
                 })
                 .sortBy(site.posts, function(i) { return -dateValue(i.date); })
                 .toArray()

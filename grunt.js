@@ -23,7 +23,7 @@ module.exports = function(grunt) {
 
                 '*.js'
             ],
-            tasks: 'exec'
+            tasks: 'exec less'
         },
 
         exec: {
@@ -36,13 +36,26 @@ module.exports = function(grunt) {
         server: {
             port: 8080,
             base: 'public'
+        },
+
+        less : {
+            production: {
+                options: {
+                    yuicompress: true
+                },
+                files: {
+                    'public/assets/css/styles.css': 'assets/less/bootstrap.less'
+                }
+            }
         }
 
     });
 
     // Default task.
-    grunt.registerTask('default', 'exec server watch');
+    grunt.registerTask('default', 'exec less server watch');
 
     // Import tasks
     grunt.loadNpmTasks('grunt-exec');
+    grunt.loadNpmTasks('grunt-contrib-less');
+
 };

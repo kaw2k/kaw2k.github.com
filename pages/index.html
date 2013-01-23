@@ -6,16 +6,7 @@
 
 
 <js>
-	this.posts = _.chain(site.pages)
-                .filter(function(page) {
-                    return page.type === 'post' && !page.hidden;
-                })
-                .toArray()
-                .sortBy(function(page) {
-                    return -page.date.value; 
-                })
-                .first(3)
-                .value();
+    this.posts = _.first(site.orderedPosts(), 3);
 </js>
 
 {{#posts}}

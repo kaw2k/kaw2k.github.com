@@ -7,16 +7,7 @@
 </data>
 
 <js>
-	this.posts = _.chain(site.pages)
-                .filter(function(page) {
-                    return page.type === 'post' && !page.hidden;
-                })
-                .toArray()
-                .sortBy(function(post) {
-                    return -post.date.value;
-                })
-                .first(2)
-                .value();
+    this.posts = site.orderedPosts();
 </js>
 
 {{#posts}}

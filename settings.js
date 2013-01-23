@@ -7,3 +7,15 @@ site.settings = {
 
     trimHTML: true
 }
+
+site.orderedPosts = function () {
+    return posts = _.chain(site.pages)
+        .filter(function(post) {
+            return post.type === 'post' && !post.hidden;
+        })
+        .toArray()
+        .sortBy(function(post) {
+            return -post.date.value;
+        })
+        .value();
+}

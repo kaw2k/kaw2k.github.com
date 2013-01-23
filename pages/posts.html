@@ -13,7 +13,7 @@
                 })
                 .toArray()
                 .sortBy(function(post) {
-                    return -dateValue(post.date);
+                    return -post.date.value;
                 })
                 .first(2)
                 .value();
@@ -23,7 +23,7 @@
     <hgroup>
         <a href="~{{urlFull}}">
             <h2>{{title}}</h2>
-            <time>{{date}}</time>
+            <time>{{date.string}}</time>
         </a>
     </hgroup>
 {{/posts}}

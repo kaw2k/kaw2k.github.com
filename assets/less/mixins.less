@@ -1,18 +1,25 @@
 //////////////
 // Clearfix //
 //////////////
-.clearfix:before,
 .clearfix:after {
-    content: " ";
-    display: table;
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
 }
-
-.clearfix:after {
-    clear: both;
-}
-
+ 
 .clearfix {
-    *zoom: 1;
+	display: inline-block;
+}
+ 
+html[xmlns] .clearfix {
+	display: block;
+}
+ 
+* html .clearfix {
+	height: 1%;
 }
 
 

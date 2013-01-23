@@ -51,22 +51,19 @@ p, .p, strong, .strong, em, .em {
     font-size: @copy;
     line-height: @magic;
     margin-bottom: @magic;
-    /*font-weight: 300;*/
-}
-
-strong, .strong {
-    font-weight: 500;
+    font-weight: 300;
 }
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
-    margin-bottom: @magic;
+/*    margin-bottom: @magic;*/
     font-family: "Helvetica Neue", Lato;
-    text-transform: uppercase;
+/*    text-transform: uppercase;*/
     font-weight: 400;
 }
 h1, .h1 {
     font-size: @h1;
     line-height: @magic;
+    margin-bottom: @magic;
     /*font-weight: 300;*/
 }
 h2, .h2 {
@@ -153,7 +150,7 @@ blockquote {
 
 // Flavoring
 strong, .strong {
-    font-weight:600;
+    font-weight: 600;
     color: @strongColor;
 }
 
@@ -210,15 +207,15 @@ hr {
         border-top-color: darken(@hr, 10%);
     }
 
-    &:after {
-        content: "§";
-        display: inline-block;
-        position: relative; 
-        top: -0.7em;  
-        font-size: 1.5em;
-        padding: 0 0.25em;
-        background: white;
-    }
+    /*&:after {*/
+        /*content: "§";*/
+        /*display: inline-block;*/
+        /*position: relative; */
+        /*top: -0.7em;  */
+        /*font-size: 1.5em;*/
+        /*padding: 0 0.25em;*/
+        /*background: white;*/
+    /*}*/
 }
 
 // Lists
@@ -274,7 +271,7 @@ html {
     &:hover {
         /*background: url('../img/grid.png') 5px top repeat-y #fff;*/
         /*background: url('../img/grid30.png') -10px top repeat-y #fff;*/
-        /*background: url('../img/30.png');*/
+        //background: url('../img/30.png');
         /*background: url('../img/24.png');*/
     }
 }
@@ -451,5 +448,16 @@ iframe {
 .profile-pic {
 	width: @siteWidth;
 	height: auto;
-	
+}
+
+.post-navigation {
+    .clearfix();
+    width: 100%;
+}
+
+.next {
+    float: right;
+}
+.previous {
+    float: left;
 }

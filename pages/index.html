@@ -10,9 +10,11 @@
                 .filter(function(page) {
                     return page.type === 'post' && !page.hidden;
                 })
-                .sortBy(site.posts, function(i) { return -dateValue(i.date); })
                 .toArray()
-                .first(2)
+                .sortBy(function(page) {
+                    return -page.date.value; 
+                })
+                .first(3)
                 .value();
 </js>
 
@@ -20,10 +22,10 @@
     <hgroup>
         <a href="~{{urlFull}}">
             <h2>{{title}}</h2>
-            <time>{{date}}</time>
+            <time>{{date.string}}</time>
         </a>
     </hgroup>
     {{#synopsis}}
-        <p>{{synopsis}} <a href="{{urlFull}}">Read More.</a></p>
+    <p>{{{synopsis}}} <a href="{{urlFull}}">Read More.</a></p>
     {{/synopsis}}
 {{/posts}}

@@ -1,0 +1,197 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>KawDev</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic|Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,900,700italic' rel='stylesheet' type='text/css'>
+
+
+    <!-- Styling and Profilin -->
+    <link href="/assets/css/tomorrow.css" type="text/css" rel="stylesheet"  />
+    <!--<link href="/css/styles.css" type="text/css" rel="stylesheet" />-->
+
+    <!-- Less Styles -->
+    <link rel="stylesheet/less" type="text/less" href="/assets/less/bootstrap.less" >
+    <script src="/assets/js/vendor/less.js" ></script>
+
+    <!-- Modernizer -->
+    <script src="/assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js" ></script>
+</head>
+<body onload="prettyPrint()">
+<div class="container">
+
+
+
+
+<section class="sidebar">
+    <div class="wrapper">
+        <a class="logo" href="/"><span class="kaw"><span class="cap">k</span>aw</span><span class="dev"><span class="cap" >d</span>ev</span></a>
+        <nav>
+            <ul>
+                <li><a class="active" href="/posts&#x2F;" >Posts</a></li>
+                <li><a  href="/about" >About</a></li>
+                <li><a  href="/projects" >Projects</a></li>
+                <li><a  href="https:&#x2F;&#x2F;github.com&#x2F;kaw2k">GitHub</a></li>
+            </ul>
+        </nav>
+    </div>
+</section><!-- sidebar -->
+
+
+<section class="main">
+
+    <section class="post">
+
+        <hgroup>
+            <time>January 23, 2013</time>
+            <h1>Planning a Static Site Compiler</h1>
+        </hgroup>
+
+        <p>This is the second post in a series about building a static site compiler in NodeJS. If you want to view the rest, visit the <a href="#">Static Site Compiler</a> tag. This post will define what we want to accomplish and plan the layout of the engine.
+
+</p>
+<h2>Motivation</h2>
+<p>There are plenty of static site compilers floating around the internet such as GitHub&#39;s <a href="https://github.com/mojombo/jekyll">Jekyll</a> and <a href="http://hammerformac.com/">Hammer for Mac</a>. They all have their perks and drawbacks. When I decided to build this site, I thought it would be a good learning experience to roll my own version. It will incorporate some of the nicer aspects of the other popular engines with the added benefit of being extremely lightweight and unobtrusive.
+
+
+</p>
+<h2>Specifications &amp; Objectives</h2>
+<p>Lets start with what we want to learn, then we will define our development stack. We want to explore...
+
+</p>
+<ul>
+<li>How static site compilers work</li>
+<li>Command line scripting with NodeJS</li>
+<li>Publishing an application with NPM</li>
+<li>Javascript regular expressions</li>
+<li>Popular Javascript libraries</li>
+<li>Basic Git commands</li>
+</ul>
+<p>To accomplish these goals, we will pull in a various libraries and make assumptions about how a web site should be made. 
+
+</p>
+<p>First, and most importantly, we want to have the ability to separate the concerns of our websites. We do not want to worry about style while we are writing content and vice versa. Additionally, we do not want to worry about structure while working on content or styling. To accomplish these three, we want: the ability to have layouts to define page style, Markdown to take care of structuring the DOM, and custom directives to pull in content.
+
+</p>
+<p>Secondly, we want fast iterations during all aspects of the project; including the design of the compiler itself. This compiler should be simple and logical from the ground up. Setting up new sites should be effortless. Deploying your site should happen behind the scenes with a single command. In short, we want to design a tool that gets out of the way so you can just focus on your website.
+
+</p>
+<h2>Jargon</h2>
+<p>With the objectives and specifications out of the way, lets define some keywords we will be using throughout the project. These will end up being directives and other words of importance during development.
+
+</p>
+<ul>
+<li><strong>Partials:</strong> A partial is a common chunk of code that gets imported into various pages. Partials can contain static or dynamic code. For example, you would want a partial to define the header of your website. <em>Possible Use:</em> <code>&lt;!-- @partial(&#39;header&#39;) --&gt;</code></li>
+<li><strong>Layout:</strong> A layout is used to define the style of a page. Every post / page / etc will have be associated with a layout. Once a page object is parsed, it will be inserted into a layout. Layouts are automatically given based on the containing folder name, and can be over written if desired..</li>
+<li><strong>Placing:</strong> Placing is used in conjunction with layouts and is only used within a layout file. The difference between a partial and placement is partials define a separate entity to get imported into the page. Placement searches the corresponding page object for an appropriate property tag. It will become apparent later why we want to separate the place command from how Mustache renders templates. <em>Possible Use:</em> <code>&lt;!-- @place(&#39;file&#39;) --&gt;</code></li>
+<li><strong>Templates:</strong> While layouts define the overall structure of a page, templates define the page&#39;s details. For example, a navigation partial would have a template defining how each link is meant to look. For our purposes, we will be using <a href="https://github.com/janl/mustache.js/">Mustache</a> <code></code> to handle templates.</li>
+<li><strong>Data:</strong> Every file has an optional <code>&lt;data&gt;</code> meta tag it can have. This tag will be stripped from the file and run through <code>JSON.parse()</code>. Any information within these tags will over-write any defaults a file may pickup. Also, any data in these tags will be available to the page object at compilation time.</li>
+<li><strong>JS:</strong> We may want to run server side code within a page at compilation time. This would be the equivalent of having a <code>&lt;?php&gt;</code> block in your HTML. For our use, we will have anything inside <code>&lt;js&gt;</code> tags be stripped and executed. The context will be the <em>final</em> page object with access to the site object as well.</li>
+<li><strong>Pages:</strong> Pages are the actual output of the compiler. The compiler does not distinguish between <em>types</em> of pages, they should all be stored in one location. You can define the types of pages specifying so in the <code>&lt;data&gt;</code> tag of a page. Alternatively, you can group pages together in folders where the name of the folder is the plural of the type it should be given. For example, a folder named <code>sections/</code> would give the page a type of <code>section</code></li>
+</ul>
+<h2>Program Flow</h2>
+<p>Cool. With the buzz words out of the way, we now can talk about how this compiler will flow. Here is a super high level breakdown of how the compilation will work:
+
+</p>
+<ol>
+<li>Initialization</li>
+<li>Reading in files</li>
+<li>Content placement</li>
+<li>Partial imports</li>
+<li>Dynamic code execution </li>
+<li>Mustache templating</li>
+<li>Fix links </li>
+<li>Output Step</li>
+</ol>
+<p>The compiler will start with an <strong>initialization</strong> phase where the command line utility starts running. In this stage, we will take care of all the housekeeping that is common between all processes of the utility. For example, we may want to read in the users settings at this stage as they will modify how the compiler behaves. The  initialization stage ends by executing the users command.
+
+</p>
+<p>Next, assuming we have received a <code>build</code> command, the compiler will pro grammatically <strong>read in all the files</strong> of the project. As each file is read, it will be primitively processed. It&#39;s meta data and dynamic code will be parsed out and stored for later use, along with a few other simple tasks. It is important that all the information about the site is read in before any other actions are taken. At the end of this stage, the complete <code>site</code> object will have been formed.
+
+</p>
+<p>We now iterate over each of the <code>pages</code> of the site and <strong>implement it into it&#39;s layout</strong>. Now, every page has a pseudo structure with a mixture of directives, templates, and markdown. We then take this transformed <code>page</code> object and <strong>import it&#39;s partials.</strong> By importing the partials after placing the content into layouts, we enable the user to have imports in both the individual pages and the layouts. We can later modify this step to not only take care of partials, but any other directives that will crop up down the road.
+
+</p>
+<p>The <code>page</code> objects have all their static content at this time, they are now ready to <strong>execute their dynamic code</strong>. Both the partials and the layouts have transfered their meta data and scripts into the <code>page</code> object. When the combined scripts run, their scope should be the <code>page</code> and should also have access to the <code>site</code>.
+
+</p>
+<p>With all the heavy lifting done, all we have to do now is clean house. First, we run each <code>page</code> through <strong>Mustache and Markdown compilers</strong>. Mustache will use the dynamic data generated from the previous step along side the meta data from the files to generate the final content of the page. We take this finalized document and fix any <strong>dangling links,</strong> and lastly we <strong>output the file</strong> to the appropriate location!
+
+
+</p>
+<h2>Moving Forward</h2>
+<p>With the super high level planning out of the way, our next lesson  will actually have code! We will start a simple command line interface and get up and running with NPM :D 
+</p>
+
+
+    </section>
+    
+    <div class="post-navigation">
+        <p class="previous">
+            <a href="/posts&#x2F;ssc" >&larr; Introducing SSC.JS</a>
+        </p>
+
+    </div>
+
+    
+<hr />
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+var disqus_shortname = 'kawdev';
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+</section>
+
+</div><!-- container -->
+<!-- jQuery -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.8.3.min.js" ><\/script>')
+</script>
+
+<!-- Prettify Dat Code -->
+<script src="/assets/js/vendor/prettify/prettify.js" ></script>
+
+<!-- Scripts -->
+<script src="/assets/js/main.js" ></script>
+<script> $('code, pre').addClass('prettyprint'); </script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28018916-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</body>
+</html>
+

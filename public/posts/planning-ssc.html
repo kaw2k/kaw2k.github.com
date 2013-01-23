@@ -62,7 +62,7 @@
 
 </p>
 <h2>Specifications &amp; Objectives</h2>
-<p>Lets start with what we want to learn, then we will define our development stack. We want to explore...
+<p>Let&#39;s start with what we want to learn, then we will define our development stack. We want to explore...
 
 </p>
 <ul>
@@ -73,7 +73,7 @@
 <li>Popular Javascript libraries</li>
 <li>Basic Git commands</li>
 </ul>
-<p>To accomplish these goals, we will pull in a various libraries and make assumptions about how a web site should be made. 
+<p>To accomplish these goals, we will pull in various libraries and make assumptions about how a web site should be made. 
 
 </p>
 <p>First, and most importantly, we want to have the ability to separate the concerns of our websites. We do not want to worry about style while we are writing content and vice versa. Additionally, we do not want to worry about structure while working on content or styling. To accomplish these three, we want: the ability to have layouts to define page style, Markdown to take care of structuring the DOM, and custom directives to pull in content.
@@ -83,20 +83,20 @@
 
 </p>
 <h2>Jargon</h2>
-<p>With the objectives and specifications out of the way, lets define some keywords we will be using throughout the project. These will end up being directives and other words of importance during development.
+<p>With the objectives and specifications out of the way, let&#39;s define some keywords we will be using throughout the project. These will end up being directives and other words of importance during development.
 
 </p>
 <ul>
 <li><strong>Partials:</strong> A partial is a common chunk of code that gets imported into various pages. Partials can contain static or dynamic code. For example, you would want a partial to define the header of your website. <em>Possible Use:</em> <code>&lt;!-- @partial(&#39;header&#39;) --&gt;</code></li>
-<li><strong>Layout:</strong> A layout is used to define the style of a page. Every post / page / etc will have be associated with a layout. Once a page object is parsed, it will be inserted into a layout. Layouts are automatically given based on the containing folder name, and can be over written if desired..</li>
-<li><strong>Placing:</strong> Placing is used in conjunction with layouts and is only used within a layout file. The difference between a partial and placement is partials define a separate entity to get imported into the page. Placement searches the corresponding page object for an appropriate property tag. It will become apparent later why we want to separate the place command from how Mustache renders templates. <em>Possible Use:</em> <code>&lt;!-- @place(&#39;file&#39;) --&gt;</code></li>
+<li><strong>Layout:</strong> A layout is used to define the style of a page. Every post / page / etc will have be associated with a layout. Once a page object is parsed, it will be inserted into a layout. Layouts are automatically given based on the containing folder name, and can be overwritten if desired.</li>
+<li><strong>Placing:</strong> Placing is used in conjunction with layouts and is only used within a layout file. The difference between a partial and placement is that partials define a separate entity to get imported into the page. Placement searches the corresponding page object for an appropriate property tag. It will become apparent later why we want to separate the place command from how Mustache renders templates. <em>Possible Use:</em> <code>&lt;!-- @place(&#39;file&#39;) --&gt;</code></li>
 <li><strong>Templates:</strong> While layouts define the overall structure of a page, templates define the page&#39;s details. For example, a navigation partial would have a template defining how each link is meant to look. For our purposes, we will be using <a href="https://github.com/janl/mustache.js/">Mustache</a> <code></code> to handle templates.</li>
-<li><strong>Data:</strong> Every file has an optional <code>&lt;data&gt;</code> meta tag it can have. This tag will be stripped from the file and run through <code>JSON.parse()</code>. Any information within these tags will over-write any defaults a file may pickup. Also, any data in these tags will be available to the page object at compilation time.</li>
+<li><strong>Data:</strong> Every file has an optional <code>&lt;data&gt;</code> meta tag it can have. This tag will be stripped from the file and run through <code>JSON.parse()</code>. Any information within these tags will overwrite any defaults a file may pickup. Also, any data in these tags will be available to the page object at compilation time.</li>
 <li><strong>JS:</strong> We may want to run server side code within a page at compilation time. This would be the equivalent of having a <code>&lt;?php&gt;</code> block in your HTML. For our use, we will have anything inside <code>&lt;js&gt;</code> tags be stripped and executed. The context will be the <em>final</em> page object with access to the site object as well.</li>
-<li><strong>Pages:</strong> Pages are the actual output of the compiler. The compiler does not distinguish between <em>types</em> of pages, they should all be stored in one location. You can define the types of pages specifying so in the <code>&lt;data&gt;</code> tag of a page. Alternatively, you can group pages together in folders where the name of the folder is the plural of the type it should be given. For example, a folder named <code>sections/</code> would give the page a type of <code>section</code></li>
+<li><strong>Pages:</strong> Pages are the actual output of the compiler. The compiler does not distinguish between <em>types</em> of pages, so they should all be stored in one location. You can define the types of pages specifying so in the <code>&lt;data&gt;</code> tag of a page. Alternatively, you can group pages together in folders where the name of the folder is the plural of the type it should be given. For example, a folder named <code>sections/</code> would give the page a type of <code>section</code></li>
 </ul>
 <h2>Program Flow</h2>
-<p>Cool. With the buzz words out of the way, we now can talk about how this compiler will flow. Here is a super high level breakdown of how the compilation will work:
+<p>Cool. With the buzz words out of the way, we now can talk about how this compiler will flow. Here is a super high-level breakdown of how the compilation will work:
 
 </p>
 <ol>
@@ -109,24 +109,24 @@
 <li>Fix links </li>
 <li>Output Step</li>
 </ol>
-<p>The compiler will start with an <strong>initialization</strong> phase where the command line utility starts running. In this stage, we will take care of all the housekeeping that is common between all processes of the utility. For example, we may want to read in the users settings at this stage as they will modify how the compiler behaves. The  initialization stage ends by executing the users command.
+<p>The compiler will start with an <strong>initialization</strong> phase in which the command line utility starts running. In this stage, we will take care of all the housekeeping that is common between all processes of the utility. For example, we may want to read in the users settings at this stage as they will modify how the compiler behaves. The  initialization stage ends by executing the user&#39;s command.
 
 </p>
-<p>Next, assuming we have received a <code>build</code> command, the compiler will pro grammatically <strong>read in all the files</strong> of the project. As each file is read, it will be primitively processed. It&#39;s meta data and dynamic code will be parsed out and stored for later use, along with a few other simple tasks. It is important that all the information about the site is read in before any other actions are taken. At the end of this stage, the complete <code>site</code> object will have been formed.
+<p>Next, assuming we have received a <code>build</code> command, the compiler will programmatically <strong>read in all the files</strong> of the project. As each file is read, it will be primitively processed. Its meta data and dynamic code will be parsed out and stored for later use, along with a few other simple tasks. It is important that all the information about the site is read in before any other actions are taken. At the end of this stage, the complete <code>site</code> object will have been formed.
 
 </p>
-<p>We now iterate over each of the <code>pages</code> of the site and <strong>implement it into it&#39;s layout</strong>. Now, every page has a pseudo structure with a mixture of directives, templates, and markdown. We then take this transformed <code>page</code> object and <strong>import it&#39;s partials.</strong> By importing the partials after placing the content into layouts, we enable the user to have imports in both the individual pages and the layouts. We can later modify this step to not only take care of partials, but any other directives that will crop up down the road.
+<p>We now iterate over each of the <code>pages</code> of the site and <strong>implement it into its layout</strong>. Now, every page has a pseudo structure with a mixture of directives, templates, and markdown. We then take this transformed <code>page</code> object and <strong>import its partials.</strong> By importing the partials after placing the content into layouts, we enable the user to have imports in both the individual pages and the layouts. We can later modify this step to not only take care of partials, but any other directives that will crop up down the road.
 
 </p>
-<p>The <code>page</code> objects have all their static content at this time, they are now ready to <strong>execute their dynamic code</strong>. Both the partials and the layouts have transfered their meta data and scripts into the <code>page</code> object. When the combined scripts run, their scope should be the <code>page</code> and should also have access to the <code>site</code>.
+<p>The <code>page</code> objects have all their static content at this time, they are now ready to <strong>execute their dynamic code</strong>. Both the partials and the layouts have transferred their metadata and scripts into the <code>page</code> object. When the combined scripts run, their scope should be the <code>page</code> and should also have access to the <code>site</code>.
 
 </p>
-<p>With all the heavy lifting done, all we have to do now is clean house. First, we run each <code>page</code> through <strong>Mustache and Markdown compilers</strong>. Mustache will use the dynamic data generated from the previous step along side the meta data from the files to generate the final content of the page. We take this finalized document and fix any <strong>dangling links,</strong> and lastly we <strong>output the file</strong> to the appropriate location!
+<p>With all the heavy lifting done, all we have to do now is clean house. First, we run each <code>page</code> through <strong>Mustache and Markdown compilers</strong>. Mustache will use the dynamic data generated from the previous step alongside the metadata from the files to generate the final content of the page. We take this finalized document and fix any <strong>dangling links,</strong> and lastly we <strong>output the file</strong> to the appropriate location!
 
 
 </p>
 <h2>Moving Forward</h2>
-<p>With the super high level planning out of the way, our next lesson  will actually have code! We will start a simple command line interface and get up and running with NPM :D 
+<p>With the super high-level planning out of the way, our next lesson  will actually have code! We will start a simple command line interface and get up and running with NPM :D 
 </p>
 
 

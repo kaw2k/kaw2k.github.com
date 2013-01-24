@@ -463,3 +463,36 @@ iframe {
 .previous {
     float: left;
 }
+
+time + .tag {
+    /*margin-left: @magic;*/
+}
+h1 ~ .tag {
+    position:relative;
+    top: -@magic;
+}
+
+.tag {
+    .transition(all, 0.2s, linear);
+    padding: 1px 3px;
+    margin-right: 5px;
+
+    color: lighten(@a, 20%) !important; 
+
+    &:hover {
+        color: @a !important;
+    }
+}
+/*.tag {*/
+    /*.transition();*/
+    /*background: lighten(@secondary, 40%);    */
+    /*border: 1px solid lighten(@secondary, 32%);    */
+    /*border-radius: 2px;*/
+    /*padding: 1px 3px;*/
+    /*margin-right: 5px;*/
+
+    /*&:hover {*/
+        /*background: lighten(@secondary, 50%);    */
+        /*border: 1px solid lighten(@secondary, 42%);    */
+    /*}*/
+/*}*/

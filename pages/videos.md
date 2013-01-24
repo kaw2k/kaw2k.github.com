@@ -1,6 +1,5 @@
 <data>
 {
-    "title": "Videos",
     "urlPath": "",
     "navActive": "Videos"
 }

@@ -3,12 +3,12 @@
     "date": "January 23, 2013",
     "title": "Planning a Static Site Compiler",
     "synopsis": "In this post we will discus how to appraoch building a very simple static site compiler. We will explore some existing options like Jekyll to see how they approach the task and adapt it to our needs.",
-    "tags": ["Static Site Compiler", "Node", "Javascript", "NPM"],
+    "tags": ["ssc", "node", "javascript", "npm"],
     "hidden": false
 }
 </data>
 
-This is the second post in a series about building a static site compiler in NodeJS. If you want to view the rest, visit the [Static Site Compiler](#) tag. This post will define what we want to accomplish and plan the layout of the engine.
+This is the second post in a series about building a static site compiler in NodeJS. If you want to view the rest, visit the [Static Site Compiler](~tags/ssc) tag. This post will define what we want to accomplish and plan the layout of the engine.
 
 ## Motivation
 

@@ -1,6 +1,5 @@
 <data>
 {
-    "title": "About Me",
     "urlPath": "",
     "navActive": "About"
 }

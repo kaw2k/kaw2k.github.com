@@ -1,0 +1,15 @@
+<data>
+{
+"layout": "index",
+"navActive": "Posts"
+}
+</data>
+
+{{#pages}}
+    <hgroup>
+        <a href="~{{urlFull}}">
+            <h2>{{title}}</h2>
+            <time>{{date.string}}</time>
+        </a>
+    </hgroup>
+{{/pages}}

@@ -11,12 +11,15 @@
 
 {{#posts}}
     <hgroup>
-        <a href="~{{urlFull}}">
+        <a href="{{url}}">
             <h2>{{title}}</h2>
             <time>{{date.string}}</time>
+            {{#tags}}
+            <a class="tag padding-left" href="~tags/{{.}}">{{.}}</a>
+            {{/tags}}
         </a>
     </hgroup>
     {{#synopsis}}
-    <p>{{{synopsis}}} <a href="{{urlFull}}">Read More.</a></p>
+    <p>{{{synopsis}}} <a href="{{url}}">Read More.</a></p>
     {{/synopsis}}
 {{/posts}}

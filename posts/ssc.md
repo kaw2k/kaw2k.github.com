@@ -3,7 +3,7 @@
     "date": "January 13, 2013",
     "title": "Introducing SSC.JS",
     "synopsis": "SSC is a static website compiler. It was developed to be simple to install, use, and deploy with. Over the next few months we will go over how to make your own static website compiler using SSC as a baseline.",
-    "tags": ["ssc", "node", "javascript", "npm"]
+    "tags": ["ssc"]
 }
 </data>
 

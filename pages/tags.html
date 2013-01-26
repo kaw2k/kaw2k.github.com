@@ -5,11 +5,18 @@
 }
 </data>
 
+<h1>{{tag}}</h1>
+
 {{#pages}}
     <hgroup>
-        <a href="~{{urlFull}}">
+        <a href="{{url}}">
             <h2>{{title}}</h2>
             <time>{{date.string}}</time>
+            <aside>
+                {{#tags}}
+                    <a class="tag" href="~tags/{{.}}">{{.}}</a>
+                {{/tags}}
+            </aside>
         </a>
     </hgroup>
 {{/pages}}

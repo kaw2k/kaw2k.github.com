@@ -1,0 +1,65 @@
+// Rhythm
+$base-font-size: 16px
+$base-line-height: 28px
+@include establish-baseline
+
+body
+  font-family: adelle
+  //font-family: "proxima-nova"
+  color: $grey
+
+// Headers
+h1, h2, h3, h4, h5, h6
+  color: $darkGrey
+  //font-family: Merriweather
+  //font-family: adelle
+  font-family: "proxima-nova"
+  font-weight: 600
+h1
+  @include adjust-font-size-to(42px)
+h2
+  @include margin-leader(2/3)
+  @include adjust-font-size-to(24px)
+h3
+  @include adjust-font-size-to(20px)
+
+// Copy Text
+p+p
+  @include leader()
+  
+
+// Flavor
+strong
+  font-weight: bold
+  color: darken($grey, 10%)
+em
+  font-style: italic
+
+// Links
+a
+  @include transition(all 0.2s linear)
+  @include link-colors($primary, darken($primary, 15%))
+  text-decoration: none
+
+
+// Lists
+ul, ol
+  @include leader()
+  @include trailer()
+  margin-left: 10px
+  list-style-position: inside !important
+
+ul
+  list-style: square
+
+ol
+  list-style: decimal
+
+//li+li
+  //@include leader(1/2)
+
+hr
+  @include leader()
+  @include trailer()
+  border: none
+  border-bottom: 1px solid #eee

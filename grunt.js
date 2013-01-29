@@ -6,6 +6,7 @@ module.exports = function(grunt) {
         watch: {
             files: [
                 'assets/**/*.less',
+                'assets/stylesheets/*.css',
                 //'assets/**/*.css',
                 'assets/**/*.js',
 

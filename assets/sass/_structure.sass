@@ -1,0 +1,72 @@
+// Grid system
+$grid-background-total-columns: 10
+$grid-background-column-width: 50
+$grid-background-gutter-width: 10
+$show-column-grid-backgrounds: false
+$show-baseline-grid-backgrounds: false
+
+
+*, *:before, *:after
+  @include box-sizing(border-box)
+
+body
+  @include grid-background()
+
+.main, .navigation .wrapper
+  $c: $grid-background-total-columns
+  $w: $grid-background-column-width
+  $g: $grid-background-gutter-width
+  width: 0px + $c * ($w + $g)
+  margin: 0 auto
+
+
+
+.navigation
+  @include adjust-font-size-to(20px)
+  @include trailer()
+  border-bottom: 1px solid #eee
+
+  .wrapper
+    display: table
+    text-align: center
+
+  li
+    display: inline-block
+    padding-right: 30px
+
+  a:not(.logo)
+    @include link-colors(lighten($grey, 20%), $grey)
+    text-decoration: none
+
+    &.active
+      color: $grey
+
+
+
+
+.post hgroup
+  @include trailer()
+
+  h1, time
+    text-align: center
+    display: block
+
+  time
+    //color: lighten($grey, 20%)
+    color: #999
+    font-style: italic
+
+.post
+  p:first-of-type
+    @include adjust-font-size-to($base-font-size+2)
+
+.post-navigation
+  @include clearfix()
+  @include leader()
+
+.next
+  float: right
+
+.previous
+  float: left
+

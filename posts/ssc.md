@@ -18,7 +18,7 @@ So what does SSC do? Let's take a look!
 <iframe width="560" height="315" src="http://www.youtube.com/embed/beFR_h2K7fQ" frameborder="0" allowfullscreen></iframe>
 
 
-<h1>Features</h1>
+## Features
 
 <div class="col-1-2">
 <strong>Strong Git integration</strong>
@@ -29,14 +29,14 @@ So what does SSC do? Let's take a look!
 <p>Squirl away repetitious code in partials to keep your layouts DRY.</p>
 </div>
 <div class="col-1-2">
-<strong><em>Fast</em> setup and deployment</strong>
-<p>Sites take seconds to set up with the aid of SSC's initilization and generation commands.</p>
 <strong>Seperate layouts from content</strong>
 <p>You should not have to worry about layouts while writing content, and vice versa. Use smart layouts to seperate your concerns!</p>
+<strong><em>Fast</em> setup and deployment</strong>
+<p>Sites take seconds to set up with the aid of SSC's initilization and generation commands.</p>
 <strong>Easy templeting</strong>
 <p>Use Markdown and MustacheJS to effortlessly create content.</p>
 </div>
 
-### What are you waiting for?
+## What are you waiting for?
 
 Try it **now!** Run `sudo npm install -g ssc` and go check out the [docs](http://kaw2k.github.com/ssc-start/)!

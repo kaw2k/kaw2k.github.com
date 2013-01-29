@@ -97,33 +97,34 @@ h2 {
 
 /* line 23, ../sass/_fonts.sass */
 h3 {
+  margin-top: 1.75em;
   font-size: 1.25em;
   line-height: 1.4em;
 }
 
-/* line 27, ../sass/_fonts.sass */
+/* line 28, ../sass/_fonts.sass */
 p + p {
   margin-top: 1.75em;
 }
 
-/* line 32, ../sass/_fonts.sass */
+/* line 33, ../sass/_fonts.sass */
 strong {
   font-weight: bold;
   color: #3b3b3b;
 }
 
-/* line 35, ../sass/_fonts.sass */
+/* line 36, ../sass/_fonts.sass */
 em {
   font-style: italic;
 }
 
-/* line 38, ../sass/_fonts.sass */
+/* line 39, ../sass/_fonts.sass */
 time {
   color: #999999;
   font-style: italic;
 }
 
-/* line 43, ../sass/_fonts.sass */
+/* line 44, ../sass/_fonts.sass */
 a {
   -webkit-transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
@@ -138,7 +139,7 @@ a:hover {
   color: #be3b1b;
 }
 
-/* line 50, ../sass/_fonts.sass */
+/* line 51, ../sass/_fonts.sass */
 ul, ol {
   margin-top: 1.75em;
   margin-bottom: 1.75em;
@@ -146,17 +147,17 @@ ul, ol {
   list-style-position: inside !important;
 }
 
-/* line 56, ../sass/_fonts.sass */
+/* line 57, ../sass/_fonts.sass */
 ul {
   list-style: square;
 }
 
-/* line 59, ../sass/_fonts.sass */
+/* line 60, ../sass/_fonts.sass */
 ol {
   list-style: decimal;
 }
 
-/* line 65, ../sass/_fonts.sass */
+/* line 66, ../sass/_fonts.sass */
 hr {
   margin-top: 1.75em;
   margin-bottom: 1.75em;
@@ -254,27 +255,33 @@ hr {
 
 /* line 86, ../sass/_structure.sass */
 [class*='col-'] {
+  margin-bottom: 1.75em;
   float: left;
   padding-right: 20px;
 }
+/* line 91, ../sass/_structure.sass */
+[class*='col-'] p + strong {
+  display: block;
+  margin-top: 1.16667em;
+}
 
-/* line 90, ../sass/_structure.sass */
+/* line 95, ../sass/_structure.sass */
 [class*='col-'] + :not([class*='col-']) {
   clear: both;
 }
 
-/* line 93, ../sass/_structure.sass */
+/* line 98, ../sass/_structure.sass */
 [class*='col-']:last-of-type {
   padding-right: 0px;
   display: block;
 }
 
-/* line 97, ../sass/_structure.sass */
+/* line 102, ../sass/_structure.sass */
 .col-1-2 {
   width: 300px;
 }
 
-/* line 103, ../sass/_structure.sass */
+/* line 108, ../sass/_structure.sass */
 .img {
   display: block;
   width: 400px;
@@ -291,26 +298,26 @@ hr {
   -o-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }
-/* line 116, ../sass/_structure.sass */
+/* line 121, ../sass/_structure.sass */
 .img:hover {
   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.055);
   -moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.055);
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.055);
 }
-/* line 119, ../sass/_structure.sass */
+/* line 124, ../sass/_structure.sass */
 .img img {
   width: 398px;
 }
 
-/* line 122, ../sass/_structure.sass */
+/* line 127, ../sass/_structure.sass */
 .profile-pic {
   width: 600px;
   height: auto;
 }
 
-/* line 126, ../sass/_structure.sass */
+/* line 131, ../sass/_structure.sass */
 iframe {
   width: 560px;
   margin: 0 auto;
-  margin-bottom: 1.75em;
+  margin-top: 1.75em;
 }

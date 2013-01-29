@@ -84,8 +84,13 @@ body
 
 // Columns 
 [class*='col-']
+  @include trailer()
   float: left
   padding-right: 20px
+
+  p+strong
+    display: block
+    @include leader(2/3)
 
 [class*='col-']+:not([class*='col-'])
   clear: both
@@ -126,4 +131,5 @@ body
 iframe
   width: 560px
   margin: 0 auto 
-  @include trailer()
+  //@include trailer()
+  @include leader()

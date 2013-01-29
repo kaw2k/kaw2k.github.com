@@ -5,18 +5,23 @@
 }
 </data>
 
-<h1>{{tag}}</h1>
+
+<section class="post-list">
+
+<h1 class="center">{{tag}}</h1>
+
+<hr>
 
 {{#pages}}
+<div class="post-stub">
     <hgroup>
         <a href="{{url}}">
             <h2>{{title}}</h2>
-            <time>{{date.string}}</time>
-            <aside>
-                {{#tags}}
-                    <a class="tag" href="~tags/{{.}}">{{.}}</a>
-                {{/tags}}
-            </aside>
         </a>
+        <time>{{date.string}}</time>
     </hgroup>
+    <p>{{{synopsis}}}</p>
+</div>
 {{/pages}}
+
+</section>

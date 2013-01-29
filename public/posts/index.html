@@ -8,16 +8,26 @@
     <meta name="viewport" content="width=device-width">
 
     <!-- Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic|Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Lato:400,900,700italic' rel='stylesheet' type='text/css'>
+    <!-- Open Sans -->
+    <!--<link href="/assets/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css"  />-->
+    <!-- Lato -->
+    <!--<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>-->
+    <!-- Merriweather -->
+    <!--<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,700,900' rel='stylesheet' type='text/css'>-->
+    <!-- Typekit -->
+    <script type="text/javascript" src="//use.typekit.net/tlc4biu.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
 
 
     <!-- Styling and Profilin -->
-    <link href="/kaw2k.github.com/public/assets/css/tomorrow.css" type="text/css" rel="stylesheet"  />
-    <link href="/kaw2k.github.com/public/assets/css/styles.css" type="text/css" rel="stylesheet"  />
+    <link href="/assets/css/tomorrow.css" type="text/css" rel="stylesheet"  />
+    <link href="/assets/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css"  />
+
+
 
     <!-- Modernizer -->
-    <script src="/kaw2k.github.com/public/assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js" ></script>
+    <script src="/assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js" ></script>
 </head>
 <body onload="prettyPrint()">
 <div class="container">
@@ -25,19 +35,20 @@
 
 
 
-<section class="sidebar">
+<section class="navigation">
     <div class="wrapper">
-        <a class="logo" href="/kaw2k.github.com/public/"><span class="kaw"><span class="cap">k</span>aw</span><span class="dev"><span class="cap" >d</span>ev</span></a>
+        
         <nav>
             <ul>
-                <li><a class="active" href="/kaw2k.github.com/public/posts&#x2F;" >Posts</a></li>
-                <li><a  href="/kaw2k.github.com/public/about" >About</a></li>
-                <li><a  href="/kaw2k.github.com/public/projects" >Projects</a></li>
-                <li><a  href="https:&#x2F;&#x2F;github.com&#x2F;kaw2k">GitHub</a></li>
+              <li><a class="logo" href="/"><span class="Kaw"><span class="cap">k</span>aw</span><span class="Dev"><span class="cap" >d</span>ev</span></a></li>
+              <li><a class="active" href="/" >Posts</a></li>
+              <li><a  href="/about" >About</a></li>
+              <li><a  href="/projects" >Projects</a></li>
+              <li><a  href="https:&#x2F;&#x2F;github.com&#x2F;kaw2k">GitHub</a></li>
             </ul>
         </nav>
     </div>
-</section><!-- sidebar -->
+</section><!-- navigation -->
 
 
 <section class="main">
@@ -46,26 +57,32 @@
 
 
 
+<section class="post-list">
+
+<div class="post-stub">
     <hgroup>
-        <a href="/kaw2k.github.com/public/posts&#x2F;planning-ssc" >
+        <a href="/posts&#x2F;planning-ssc" >
             <h2>Planning a Static Site Compiler</h2>
-            <time>January 23, 2013</time>
-
-            <aside>
-                    <a class="tag" href="/kaw2k.github.com/public/tags/ssc" >ssc</a>
-            </aside>
         </a>
+        <time>January 23, 2013</time>
+        <!---->
+        <!--<a class="tag padding-left" href="/tags/ssc" >ssc</a>-->
+        <!---->
     </hgroup>
+</div>
+<div class="post-stub">
     <hgroup>
-        <a href="/kaw2k.github.com/public/posts&#x2F;ssc" >
+        <a href="/posts&#x2F;ssc" >
             <h2>Introducing SSC.JS</h2>
-            <time>January 13, 2013</time>
-
-            <aside>
-                    <a class="tag" href="/kaw2k.github.com/public/tags/ssc" >ssc</a>
-            </aside>
         </a>
+        <time>January 13, 2013</time>
+        <!---->
+        <!--<a class="tag padding-left" href="/tags/ssc" >ssc</a>-->
+        <!---->
     </hgroup>
+</div>
+
+</section>
 
 
 </section><!-- main -->
@@ -75,14 +92,14 @@
 <!-- jQuery -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script>
-    window.jQuery || document.write('<script src="/kaw2k.github.com/public/assets/js/vendor/jquery-1.8.3.min.js" ><\/script>')
+    window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.8.3.min.js" ><\/script>')
 </script>
 
 <!-- Prettify Dat Code -->
-<script src="/kaw2k.github.com/public/assets/js/vendor/prettify/prettify.js" ></script>
+<script src="/assets/js/vendor/prettify/prettify.js" ></script>
 
 <!-- Scripts -->
-<script src="/kaw2k.github.com/public/assets/js/main.js" ></script>
+<script src="/assets/js/main.js" ></script>
 <script> $('code, pre').addClass('prettyprint'); </script>
 
 

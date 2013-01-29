@@ -4,8 +4,7 @@
     "title": "Planning a Static Site Compiler",
     "synopsis": "In this post we will discus how to appraoch building a very simple static site compiler. We will explore some existing options like Jekyll to see how they approach the task and adapt it to our needs.",
     "tags": ["ssc"],
-    "hidden": true,
-    "layout": "new"
+    "hidden": true
 }
 </data>
 

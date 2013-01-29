@@ -14,16 +14,15 @@
     }, this);
 </js>
 
-<section class="navigation">
+<section class="sidebar">
     <div class="wrapper">
-        
+        <a class="logo" href="~"><span class="kaw"><span class="cap">k</span>aw</span><span class="dev"><span class="cap">d</span>ev</span></a>
         <nav>
             <ul>
-              <li><a class="logo" href="~"><span class="Kaw"><span class="cap">k</span>aw</span><span class="Dev"><span class="cap">d</span>ev</span></a></li>
-              {{#nav}}
-              <li><a {{#active}}class="active"{{/active}} href="{{url}}">{{link}}</a></li>
-              {{/nav}}
+                {{#nav}}
+                <li><a {{#active}}class="active"{{/active}} href="{{url}}">{{link}}</a></li>
+                {{/nav}}
             </ul>
         </nav>
     </div>
-</section><!-- navigation -->
+</section><!-- sidebar -->

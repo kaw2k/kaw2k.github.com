@@ -1,6 +1,6 @@
 <js>
     this.nav = [
-        {url: '~posts/', link: 'Posts'},
+        {url: '~', link: 'Posts'},
         {url: '~about', link: 'About'},
         {url: '~projects', link: 'Projects'},
         //{url: '~videos', link: 'Videos'},
@@ -14,15 +14,16 @@
     }, this);
 </js>
 
-<section class="sidebar">
+<section class="navigation">
     <div class="wrapper">
-        <a class="logo" href="~"><span class="kaw"><span class="cap">k</span>aw</span><span class="dev"><span class="cap">d</span>ev</span></a>
+        
         <nav>
             <ul>
-                {{#nav}}
-                <li><a {{#active}}class="active"{{/active}} href="{{url}}">{{link}}</a></li>
-                {{/nav}}
+              <li><a class="logo" href="~"><span class="Kaw"><span class="cap">k</span>aw</span><span class="Dev"><span class="cap">d</span>ev</span></a></li>
+              {{#nav}}
+              <li><a {{#active}}class="active"{{/active}} href="{{url}}">{{link}}</a></li>
+              {{/nav}}
             </ul>
         </nav>
     </div>
-</section><!-- sidebar -->
+</section><!-- navigation -->

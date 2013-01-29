@@ -20,17 +20,20 @@ this.postNext = (i-1 < 0) ? null : posts[i-1];
 
 </js>
 
-<!-- @partial('header_new') -->
+<!-- @partial('header') -->
 
-<!-- @partial('nav_new') -->
+<!-- @partial('nav') -->
 
 <section class="main">
 
     <section class="post">
 
         <hgroup>
-            <h1>{{title}}</h1>
             <time>{{date.string}}</time>
+            <h1>{{title}}</h1>
+            {{#tags}}
+            <a class="tag padding-left" href="~tags/{{.}}">{{.}}</a>
+            {{/tags}}
         </hgroup>
 
         <!-- @place('post') -->

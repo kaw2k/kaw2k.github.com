@@ -10,17 +10,20 @@
     this.posts = site.orderedPosts();
 </js>
 
+<section class="post-list">
+
 {{#posts}}
+<div class="post-stub">
     <hgroup>
         <a href="{{url}}">
             <h2>{{title}}</h2>
-            <time>{{date.string}}</time>
-
-            <aside>
-                {{#tags}}
-                    <a class="tag" href="~tags/{{.}}">{{.}}</a>
-                {{/tags}}
-            </aside>
         </a>
+        <time>{{date.string}}</time>
+        <!--{{#tags}}-->
+        <!--<a class="tag padding-left" href="~tags/{{.}}">{{.}}</a>-->
+        <!--{{/tags}}-->
     </hgroup>
+</div>
 {{/posts}}
+
+</section>

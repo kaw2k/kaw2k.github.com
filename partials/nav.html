@@ -2,6 +2,7 @@
     this.nav = [
         {url: '~', link: 'Posts'},
         {url: '~about', link: 'About'},
+        {url: '~', link: 'kaw.dev', class: 'logo'},
         {url: '~projects', link: 'Projects'},
         //{url: '~videos', link: 'Videos'},
         {url: 'https://github.com/kaw2k', link: 'GitHub'}
@@ -19,11 +20,13 @@
         
         <nav>
             <ul>
-              <li><a class="logo" href="~"><span class="Kaw"><span class="cap">k</span>aw</span><span class="Dev"><span class="cap">d</span>ev</span></a></li>
               {{#nav}}
-              <li><a {{#active}}class="active"{{/active}} href="{{url}}">{{link}}</a></li>
+              <li {{#class}}class="{{class}}"{{/class}}>
+                  <a {{#active}}class="active"{{/active}} href="{{url}}">{{link}}</a>
+              </li>
               {{/nav}}
             </ul>
         </nav>
     </div>
 </section><!-- navigation -->
+

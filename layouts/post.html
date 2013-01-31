@@ -37,15 +37,11 @@ this.postNext = (i-1 < 0) ? null : posts[i-1];
     
     <div class="post-navigation">
         {{#postPrevious}}
-        <p class="previous">
-            <a href="{{url}}">&larr; {{title}}</a>
-        </p>
+            <a class="previous" href="{{url}}">&larr; {{title}}</a>
         {{/postPrevious}}
 
         {{#postNext}}
-        <p class="next">
-            <a href="{{url}}">{{title}} &rarr;</a>
-        </p>
+            <a class="next" href="{{url}}">{{title}} &rarr;</a>
         {{/postNext}}
     </div>
 

@@ -8,7 +8,7 @@
 }
 </data>
 
-This is the second post in a series about building a static site compiler in NodeJS. If you want to view the rest, visit the [Static Site Compiler](~tags/ssc) tag. This post will define what we want to accomplish and plan the layout of the engine.
+This is the first post in a series about building a static site compiler in NodeJS. If you want to view the rest, visit the [Static Site Compiler](~tags/ssc) tag. This post will define what we want to accomplish and plan the layout of the engine.
 
 ## Motivation
 

@@ -5,6 +5,11 @@
 }
 </data>
 
+<js>
+this.pages = _.sortBy(this.pages, function(post) {
+                    return -post.date.value;
+                })
+</js>
 
 <section class="post-list">
 

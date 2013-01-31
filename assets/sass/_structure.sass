@@ -28,6 +28,7 @@ body
 .navigation
   @include adjust-font-size-to(20px)
   @include trailer()
+  @include leader()
   border-bottom: 1px solid #eee
 
   .wrapper
@@ -44,6 +45,9 @@ body
 
     &.active
       color: $grey
+
+  .logo a
+    @include link-colors($orange, $orange)
 
 
 
@@ -62,8 +66,12 @@ body
     text-align: center
 
   .post-stub
-    @include padding-trailer()
-    border-bottom: 1px solid #eee
+
+    &:not(:last-of-type)
+      border-bottom: 1px solid #eee
+
+    &:not(:first-of-type)
+      @include padding-leader()
   
 
 .post
@@ -72,7 +80,7 @@ body
 
 .post-navigation
   @include clearfix()
-  @include leader()
+  @include trailer()
 
 .next
   float: right
@@ -90,7 +98,7 @@ body
 
   p+strong
     display: block
-    @include leader(2/3)
+    //@include leader(2/3)
 
 [class*='col-']+:not([class*='col-'])
   clear: both
@@ -111,7 +119,7 @@ body
 
   margin: 0 auto
   @include trailer()
-  @include leader()
+  @include trailer()
 
   border: 1px solid #ddd
 
@@ -132,7 +140,7 @@ iframe
   width: 560px
   margin: 0 auto 
   //@include trailer()
-  @include leader()
+  @include trailer()
 
 .center
   text-align: center

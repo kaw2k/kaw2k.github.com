@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Introducing SSC.JS: KawDev</title>
+    <title>Getting Started With Node: KawDev</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
@@ -71,52 +71,52 @@
     <section class="post">
 
         <hgroup>
-            <h1>Introducing SSC.JS</h1>
-            <time>January 13, 2013</time>
+            <h1>Getting Started With Node</h1>
+            <time>February 3, 2013</time>
         </hgroup>
 
-        <p>
-
-<p><a href="http://kaw2k.github.com/ssc-start/">SSC</a> is a simple static website compiler. I started this project when I wanted to make a simple, static website. I considered using <a href="https://github.com/mojombo/jekyll">Jekyll</a> / <a href="http://octopress.org/">Octopress</a>, but I wanted something a bit simpler. I also considered using <a href="http://hammerformac.com/">Hammer</a>, but not at the cost of spending money. I figured this was a good time to learn something new and decided to role my own compiler.
+        <p>This is the second post in a series about building a static site compiler in NodeJS. If you want to view the rest, visit the <a href="/kaw2k.github.com/public/tags/ssc" >Static Site Compiler</a> tag. This post will go through: setting up the project with NPM, go over the overall structure of the program, build a simple command line interface, and a task registration system.
 
 </p>
-<p>SSC is an on-going project. The initial goal was to learn how to build a static site compiler. What fun is learning if you can&#39;t share? Over the next couple of months we will go over each step of creating a site compiler. The end goal is to produce something very similar to SSC.
+<p>If you want to view the finished code, you can grab it from the GitHub project. <strong>FIX: Bad repo and bad wording</strong>
 
 </p>
-<p>So what does SSC do? Let&#39;s take a look!
+<pre><code>git clone https://github.com/kaw2k/ssc-start.git ~/Development/sc
+cd ~/Development/sc
+git checkout -f step-1</code></pre>
+<h2>Setting Up the Project</h2>
+<p>Now that we have a basic idea of what we want to accomplish and learn, lets get started with our project! First, make sure you have <code>grunt</code> installed globally with <code>sudo npm install -g grunt</code>. Now, lets generate our project, All the defaults should be fine, we can change them down the road. 
 
 </p>
-<iframe width="560" height="315" src="http://www.youtube.com/embed/beFR_h2K7fQ" frameborder="0" allowfullscreen></iframe>
+<pre><code>mkdir ~/Development/ssc
+cd ~/Development/ssc
+grunt init:node</code></pre>
+<p>This gave us a bunch of default files and folders. We wont go into depth about each individual file, however you can read up about the <code>package.json</code> file <a href="http://package.json.nodejitsu.com">here</a> and the <code>grunt.js</code> file <a href="https://github.com/gruntjs/grunt/wiki">here</a>.
 
+</p>
+<p>Lets start by getting a simple &quot;Hello World&quot; client up. In the root of the project, make a new folder called <code>bin</code>, and inside of it make a file called <code>ssc</code> without any file extension and the following contents. 
 
-<h2>Features</h2>
-<div class="col-1-2">
-<strong>Strong Git integration</strong>
-<p>Built with git in mind from the start. Your site should be backed up and deployed in two commands.</p>
-<strong>Dynamic &quot;Server Side&quot; Javascript</strong>
-<p>Use Javascript just like any server side language to add additional features to your pages.</p>
-<strong>Store common code in partials</strong>
-<p>Squirl away repetitious code in partials to keep your layouts DRY.</p>
-</div>
-<div class="col-1-2">
-<strong>Seperate layouts from content</strong>
-<p>You should not have to worry about layouts while writing content, and vice versa. Use smart layouts to seperate your concerns!</p>
-<strong><em>Fast</em> setup and deployment</strong>
-<p>Sites take seconds to set up with the aid of SSC&#39;s initilization and generation commands.</p>
-<strong>Easy templeting</strong>
-<p>Use Markdown and MustacheJS to effortlessly create content.</p>
-</div>
+</p>
+<pre><code>#!/usr/bin/env node
+var cwd = process.cwd();
+console.log(&#39;Hello World! We are in the directory: &#39; + cwd)</code></pre>
+<p>The first line of the file is a shebang which tells the operating system what compiler we want the code to run in; in this case it is the node compiler. We then grab the current directory the script was run in via the <a href="http://nodejs.org/api/process.html">process</a> object. Lastly we print out a simple message to the console.
 
-<h2>What are you waiting for?</h2>
-<p>Try it <strong>now!</strong> Run <code>sudo npm install -g ssc</code> and go check out the <a href="http://kaw2k.github.com/ssc-start/">docs</a>!
+</p>
+<p>You can execute this directly via <code>node bin/ssc</code> at this time and watch it output your message. For convenience, we are going to make a <a href="http://en.wikipedia.org/wiki/Symbolic_link">symbolic link</a> between this file and our local scripts.
+
+</p>
+<pre><code>ln -s /usr/local/bin/ssc ./bin/ssc
+chmod 755 bin/ssc</code></pre>
+<p>After restarting your terminal you can run <code>ssc</code> and the compiler will run from the directory you are at.
 </p>
 
 
     </section>
     
     <div class="post-navigation">
+            <a class="previous" href="/kaw2k.github.com/public/posts&#x2F;planning-ssc" >&larr; Planning a Static Site Compiler</a>
 
-            <a class="next" href="/kaw2k.github.com/public/posts&#x2F;planning-ssc" >Planning a Static Site Compiler &rarr;</a>
     </div>
 
     

@@ -8,9 +8,13 @@ body
   //font-family: "proxima-nova"
   color: $grey
 
+// Give all the things trailers that need some
+p, pre, hr
+  @include trailer(1)
+
 // Headers
 h1, h2, h3, h4, h5, h6
-  color: $darkGrey
+  color: $black
   //font-family: Merriweather
   //font-family: adelle
   font-family: "proxima-nova"
@@ -18,16 +22,13 @@ h1, h2, h3, h4, h5, h6
 h1
   @include adjust-font-size-to(42px)
 h2
-  @include margin-leader(2/3)
+  //@include margin-leader(2/3)
   @include adjust-font-size-to(24px)
 h3
-  @include margin-leader()
+  //@include margin-leader()
   @include adjust-font-size-to(20px)
 
 // Copy Text
-p+p
-  @include leader()
-  
 
 // Flavor
 strong
@@ -49,7 +50,7 @@ a
 
 // Lists
 ul, ol
-  @include leader()
+  //@include leader()
   @include trailer()
   margin-left: 10px
   list-style-position: inside !important
@@ -64,7 +65,7 @@ ol
   //@include leader(1/2)
 
 hr
-  @include leader()
+  //@include leader()
   @include trailer()
   border: none
   border-bottom: 1px solid #eee

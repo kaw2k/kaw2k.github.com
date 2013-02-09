@@ -1,10 +1,11 @@
 <data>
 {
 	"urlName": "setting-up",
-  "date": "February 3, 2013",
-  "title": "Getting Started With Node",
+  "date": "February 23, 2013",
+  "title": "Getting Started with Node",
   "synopsis": "",
-  "tags": ["ssc"]
+  "tags": ["ssc"],
+  "hidden": true
 }
 </data>
 

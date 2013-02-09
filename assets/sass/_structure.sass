@@ -139,8 +139,9 @@ body
 iframe
   width: 560px
   margin: 0 auto 
-  //@include trailer()
   @include trailer()
+  p > &
+    @include trailer(0)
 
 .center
   text-align: center

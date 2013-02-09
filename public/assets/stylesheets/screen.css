@@ -1,4 +1,4 @@
-/* line 17, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 17, /Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -20,109 +20,109 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 22, /Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 24, /Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 26, /Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 28, /Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 30, /Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 103, /Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 32, /Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 116, /Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
 
-/* line 66, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
+/* line 66, /Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
 html {
   font-size: 100%;
   line-height: 1.75em;
 }
 
-/* line 6, ../sass/_fonts.sass */
+/* line 6, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_fonts.sass */
 body {
   font-family: adelle;
   color: #555555;
 }
 
-/* line 12, ../sass/_fonts.sass */
+/* line 12, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_fonts.sass */
 p, pre, hr {
   margin-bottom: 1.75em;
 }
 
-/* line 16, ../sass/_fonts.sass */
+/* line 16, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_fonts.sass */
 h1, h2, h3, h4, h5, h6 {
   color: #333333;
   font-family: "proxima-nova";
   font-weight: 600;
 }
 
-/* line 22, ../sass/_fonts.sass */
+/* line 22, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_fonts.sass */
 h1 {
   font-size: 2.625em;
   line-height: 1.33333em;
 }
 
-/* line 24, ../sass/_fonts.sass */
+/* line 24, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_fonts.sass */
 h2 {
   font-size: 1.5em;
   line-height: 1.16667em;
 }
 
-/* line 27, ../sass/_fonts.sass */
+/* line 27, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_fonts.sass */
 h3 {
   font-size: 1.25em;
   line-height: 1.4em;
 }
 
-/* line 34, ../sass/_fonts.sass */
+/* line 34, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_fonts.sass */
 strong {
   font-weight: bold;
   color: #3b3b3b;
 }
 
-/* line 37, ../sass/_fonts.sass */
+/* line 37, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_fonts.sass */
 em {
   font-style: italic;
 }
 
-/* line 40, ../sass/_fonts.sass */
+/* line 40, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_fonts.sass */
 time {
   color: #999999;
   font-style: italic;
 }
 
-/* line 45, ../sass/_fonts.sass */
+/* line 45, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_fonts.sass */
 a {
   -webkit-transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
@@ -132,49 +132,49 @@ a {
   color: #e46242;
   text-decoration: none;
 }
-/* line 24, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 24, /Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
 a:hover {
   color: #be3b1b;
 }
 
-/* line 52, ../sass/_fonts.sass */
+/* line 52, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_fonts.sass */
 ul, ol {
   margin-bottom: 1.75em;
   margin-left: 10px;
   list-style-position: inside !important;
 }
 
-/* line 58, ../sass/_fonts.sass */
+/* line 58, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_fonts.sass */
 ul {
   list-style: square;
 }
 
-/* line 61, ../sass/_fonts.sass */
+/* line 61, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_fonts.sass */
 ol {
   list-style: decimal;
 }
 
-/* line 67, ../sass/_fonts.sass */
+/* line 67, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_fonts.sass */
 hr {
   margin-bottom: 1.75em;
   border: none;
   border-bottom: 1px solid #eeeeee;
 }
 
-/* line 16, ../sass/_structure.sass */
+/* line 16, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 *, *:before, *:after {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-/* line 22, ../sass/_structure.sass */
+/* line 22, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 .main, .navigation .wrapper {
   width: 600px;
   margin: 0 auto;
 }
 
-/* line 28, ../sass/_structure.sass */
+/* line 28, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 .navigation {
   font-size: 1.25em;
   line-height: 1.4em;
@@ -182,113 +182,113 @@ hr {
   margin-top: 1.75em;
   border-bottom: 1px solid #eeeeee;
 }
-/* line 34, ../sass/_structure.sass */
+/* line 34, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 .navigation .wrapper {
   display: table;
   text-align: center;
 }
-/* line 38, ../sass/_structure.sass */
+/* line 38, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 .navigation li {
   display: inline-block;
   padding-right: 30px;
 }
-/* line 42, ../sass/_structure.sass */
+/* line 42, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 .navigation a:not(.logo) {
   color: #888888;
   text-decoration: none;
 }
-/* line 24, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 24, /Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
 .navigation a:not(.logo):hover {
   color: #555555;
 }
-/* line 46, ../sass/_structure.sass */
+/* line 46, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 .navigation a:not(.logo).active {
   color: #555555;
 }
-/* line 49, ../sass/_structure.sass */
+/* line 49, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 .navigation .logo a {
   color: #e46242;
 }
-/* line 24, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
+/* line 24, /Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
 .navigation .logo a:hover {
   color: #e46242;
 }
 
-/* line 55, ../sass/_structure.sass */
+/* line 55, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 .post hgroup {
   margin-bottom: 1.75em;
 }
-/* line 58, ../sass/_structure.sass */
+/* line 58, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 .post hgroup h1, .post hgroup time {
   text-align: center;
   display: block;
 }
 
-/* line 64, ../sass/_structure.sass */
+/* line 64, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 .post-list hgroup {
   margin-bottom: 0.875em;
   text-align: center;
 }
-/* line 70, ../sass/_structure.sass */
+/* line 70, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 .post-list .post-stub:not(:last-of-type) {
   border-bottom: 1px solid #eeeeee;
 }
-/* line 73, ../sass/_structure.sass */
+/* line 73, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 .post-list .post-stub:not(:first-of-type) {
   padding-top: 1.75em;
 }
 
-/* line 78, ../sass/_structure.sass */
+/* line 78, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 .post p:first-of-type {
   font-size: 1.125em;
   line-height: 1.55556em;
 }
 
-/* line 81, ../sass/_structure.sass */
+/* line 81, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 .post-navigation {
   overflow: hidden;
   *zoom: 1;
   margin-bottom: 1.75em;
 }
 
-/* line 85, ../sass/_structure.sass */
+/* line 85, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 .next {
   float: right;
 }
 
-/* line 88, ../sass/_structure.sass */
+/* line 88, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 .previous {
   float: left;
 }
 
-/* line 94, ../sass/_structure.sass */
+/* line 94, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 [class*='col-'] {
   margin-bottom: 1.75em;
   float: left;
   padding-right: 20px;
 }
-/* line 99, ../sass/_structure.sass */
+/* line 99, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 [class*='col-'] p + strong {
   display: block;
 }
 
-/* line 103, ../sass/_structure.sass */
+/* line 103, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 [class*='col-'] + :not([class*='col-']) {
   clear: both;
 }
 
-/* line 106, ../sass/_structure.sass */
+/* line 106, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 [class*='col-']:last-of-type {
   padding-right: 0px;
   display: block;
 }
 
-/* line 110, ../sass/_structure.sass */
+/* line 110, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 .col-1-2 {
   width: 300px;
 }
 
-/* line 116, ../sass/_structure.sass */
+/* line 116, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 .img {
   display: block;
   width: 400px;
@@ -305,31 +305,35 @@ hr {
   -o-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }
-/* line 129, ../sass/_structure.sass */
+/* line 129, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 .img:hover {
   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.055);
   -moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.055);
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.055);
 }
-/* line 132, ../sass/_structure.sass */
+/* line 132, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 .img img {
   width: 398px;
 }
 
-/* line 135, ../sass/_structure.sass */
+/* line 135, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 .profile-pic {
   width: 600px;
   height: auto;
 }
 
-/* line 139, ../sass/_structure.sass */
+/* line 139, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 iframe {
   width: 560px;
   margin: 0 auto;
   margin-bottom: 1.75em;
 }
+/* line 143, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
+p > iframe {
+  margin-bottom: 0em;
+}
 
-/* line 145, ../sass/_structure.sass */
+/* line 146, /Users/kwelch12/Sites/kaw2k.github.com/assets/sass/_structure.sass */
 .center {
   text-align: center;
 }

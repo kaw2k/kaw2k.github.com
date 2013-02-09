@@ -6,7 +6,8 @@ module.exports = function(grunt) {
         watch: {
             files: [
                 'assets/**/*.less',
-                'assets/stylesheets/*.css',
+                'assets/**/*.scss',
+                //'assets/stylesheets/*.css',
                 //'assets/**/*.css',
                 'assets/**/*.js',
 
@@ -28,6 +29,10 @@ module.exports = function(grunt) {
         },
 
         exec: {
+            //compass: {
+                //command: 'compass compile',
+                //stdout: true
+            //},
             compile: {
                 command: 'ssc b',
                 stdout: true
@@ -49,7 +54,6 @@ module.exports = function(grunt) {
                 }
             }
         }
-
     });
 
     // Default task.
@@ -58,5 +62,4 @@ module.exports = function(grunt) {
     // Import tasks
     grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('grunt-contrib-less');
-
 };

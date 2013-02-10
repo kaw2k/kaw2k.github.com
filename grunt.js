@@ -5,8 +5,7 @@ module.exports = function(grunt) {
 
         watch: {
             files: [
-                'assets/**/*.less',
-                'assets/**/*.scss',
+                'assets/**/*.css',
                 //'assets/stylesheets/*.css',
                 //'assets/**/*.css',
                 'assets/**/*.js',
@@ -25,7 +24,7 @@ module.exports = function(grunt) {
 
                 '*.js'
             ],
-            tasks: 'less exec'
+            tasks: 'exec'
         },
 
         exec: {
@@ -42,24 +41,12 @@ module.exports = function(grunt) {
         server: {
             port: 8080,
             base: 'public'
-        },
-
-        less : {
-            production: {
-                options: {
-                    yuicompress: true
-                },
-                files: {
-                    'assets/css/styles.css': 'assets/less/bootstrap.less'
-                }
-            }
         }
     });
 
     // Default task.
-    grunt.registerTask('default', 'less exec server watch');
+    grunt.registerTask('default', 'exec server watch');
 
     // Import tasks
     grunt.loadNpmTasks('grunt-exec');
-    grunt.loadNpmTasks('grunt-contrib-less');
 };

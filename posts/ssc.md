@@ -18,8 +18,6 @@ So what does SSC do? Let's take a look!
 <iframe width="560" height="315" src="http://www.youtube.com/embed/beFR_h2K7fQ" frameborder="0" allowfullscreen></iframe>
 
 
-## Features
-
 <div class="col-1-2">
 <strong>Strong Git integration</strong>
 <p>Built with git in mind from the start. Your site should be backed up and deployed in two commands.</p>

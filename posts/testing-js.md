@@ -7,11 +7,15 @@
   "title": "Fast Experimentation with Javascript",
   "synopsis": "",
   "tags": ["testing, javascript"],
-  "hidden": false
+  "hidden": true
 }
 </data>
 
 How often do you find yourself in the situation where you are reading or writing new code and you come across something you need to test to believe? **tl;dr** [JSBin](http://jsbin.com/) is my new squeeze.
+
+75:  0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+
+80:  0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
 
 Perhaps you would want to verify the scope of a function, or how a specific methods work. You wouldn't want to do this in the actual code you were working on as there is a good chance something else in the code would contaminate what you were testing. The ideal situation would be to enter a testing environment which you can quickly spin up, poke around inside objects, and quickly pull in frameworks you are using.
 

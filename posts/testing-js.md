@@ -5,7 +5,7 @@
 	"urlPath": "posts/",
   "date": "February 10, 2013",
   "title": "Fast Experimentation with Javascript",
-  "synopsis": "What do you do when you are want of testing snippets of javascript?",
+  "synopsis": "What do you do when you are in want of testing snippets of javascript? Jump into Chrome's DevTools? Perhaps NodeJS repl? A HTML playground online? JSBin has easily won my affections for exploring javascript.",
   "tags": ["testing, javascript"],
   "hidden": false
 }

@@ -15,95 +15,97 @@
       -moz-box-sizing: border-box;
       -webkit-box-sizing: border-box;
       box-sizing: border-box; 
-
       margin: 0px;
       padding: 0px;
-
-      margin-bottom: 30px;
     }
 
-    body {
-    	width: 750px;
-      height: 100px;
+    .message {
+    	width: auto;
+      height: auto;
       position: absolute;
-      top: 50%;
-      left: 50%;
-    	margin: -50px -375px;
+      top: 50%; left: 50%;
+    	margin: -50px 0 0 -355px;
     }
 
-    h1, h2 {
-    	text-align: center;
-      font-size: 90px;
-      font-family: grandma;
-      display: inline-block;
-    }
-
-    h1, h2, span {
+    span {
       display: inline-block;
       position: relative;
       width: 128px;
       height: 100px;
-    }
-
-    h1, span {
       float: left;
+      margin-right: 20px; 
     }
 
-    .will {
-     margin-right: 70px; 
-    }
-    span {
-     margin-right: 20px; 
-    }
-    span:last-of-type {
-      margin-right: 0px;
+    h1, h2 {
+    	text-align: center;
+      font-size: 80px;
+      font-family: tamarillo;
     }
 
-    img {
-      top:-10px!important;
-    }
-
-    img, h2 {
-      width: 100%;
-      height: 100%;
+    h2 {
       position: absolute;
-      top: 0;
-      left: 0;
+      bottom: 20px;
+      left: 40%;
+      color: #a62649;
     }
 
-    span h2 {
-      display: none;
+    /* Anything in a span should take up the entire parent span */
+    span * {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
     }
 
-    span:hover h2 {
-      display: inline-block;
-    }
+    /* Nudge up those images some */
+    span img { top:-10px; }
 
-    span:hover img {
-      display: none;
-    }
+    /* Hide the second child of a span */
+    span :nth-child(2) { display: none; }
+
+    /* Show the second child of a span */
+    span:hover :nth-child(2) { display: inline-block; }
+
+    /* Hide the first child of a span on hover if it isn't the only child*/
+    span:hover :first-child:not(:only-child)  { display: none; }
+
+    .will { color: #E66689;}
+    .ewe { color: #ADADAA; }
+    .bee { color: #F7EBBE; }
+    .mine { color: #82634F; }
+    .valentine { color: #E66689; }
+
   </style>
 
 </head>
 <body>
 
-  <h1 class="will">Will</h1>
-  <span>
-    <img class="ewe" src="ewe.png" />
-    <h2>Ewe</h2>
-  </span>
-  
-  <span>
-    <img class="bee" src="bee.png" />
-    <h2>Bee</h2>
+<div class="message">
+  <span class="will">
+    <h1>Will</h1>
   </span>
 
-  <span>
-    <img class="mine" src="mine.png" />
-    <h2>Mine</h2>
+  <span class="ewe">
+    <img src="ewe.png" />
+    <h1>Ewe</h1>
   </span>
 
-  <h1 class="question">?</h1>
+  <span class="bee">
+    <img src="bee.png" />
+    <h1>Bee</h1>
+  </span>
+
+  <span class="mine">
+    <img src="mine.png" />
+    <h1>Mine</h1>
+  </span>
+
+  <span class="valentine">
+    <h1>?</h1>
+    <h1>Valentine?</h1>
+  </span>
+</div>
+
+<h2>Love, BB</h2>
 
 </body>
 </html>

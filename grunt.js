@@ -6,8 +6,7 @@ module.exports = function(grunt) {
         watch: {
             files: [
                 'assets/**/*.css',
-                //'assets/stylesheets/*.css',
-                //'assets/**/*.css',
+                //'assets/**/*.sass',
                 'assets/**/*.js',
 
                 'layouts/*.md',
@@ -29,7 +28,7 @@ module.exports = function(grunt) {
 
         exec: {
             //compass: {
-                //command: 'compass compile',
+                //command: 'compass compile -f',
                 //stdout: true
             //},
             compile: {

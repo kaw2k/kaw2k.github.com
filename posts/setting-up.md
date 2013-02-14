@@ -41,3 +41,53 @@ You can execute this directly via `node bin/ssc` at this time and watch it outpu
     chmod 755 bin/ssc
 
 After restarting your terminal you can run `ssc` and the compiler will run from the directory you are at.
+
+## Step 1: Initialization
+
+Cool, so now we have the starting point for our application hooked up to our system. Now, let's start fleshing out the skeleton of the application some. Referring back to the [planing post](~posts/planning-ssc), we are about to implement step 1, the initialization stage. We want to:
+
+0. Initialize the compiler
+1. Parse the command line options
+2. Read in the user settings
+3. Load in all the tasks that are required 
+4. Set up our `site` object
+5. Execute the user specified command
+
+Just a quick note about the above steps. Our goal is to make this compiler **simple** and at the same time extendible. We want the end product to have a few built in tasks like building and deploying, however we do *not* want to limit ourselves to only these tasks. As a result, every task the compiler does will be broken into modules that can be replaced and tested individually. If you are not happy with the module for compiling markdown, you should be able to swap in your own custom implementation.  
+
+Now, let's make new folders for our tasks and libs, as well as a few new files. Remember, tasks can be hot swapped and libs are core functionality.
+
+  cd ~/Development/ssc
+  mkdir tasks
+  mkdir lib
+  touch lib/cli.js lib/task.js lib/settings.js lib/utils.js lib/ssc.js
+
+Notice how we made a `ssc.js` file. The file `ssc` in the `bin/` directory is the entry shell script to our application. It's purpose is to call our initialization file which kicks off out application (which is `ssc.js`). Open up this file and enter the following code.
+
+**CODE FOR SSC.JS**
+
+**STEP TO INCLUDE OUR OTHER LIBRARIES**
+
+The first few lines of code pull in our required libraries. We use underscore for some functional goodness, colors for pretty text output in terminals, and grunt.js's [findup](#) file for recursive searching.
+
+**INCLUDE LIBRARY IMPORT**
+
+Next, we start to define our compiler object. The compiler object will house the user settings, custom and core tasks, and the site object itself. Here, we are simply pulling in core libs that the compiler needs in order to function.
+
+**INCLUDE LIBS IMPORT**
+
+With our basic compiler functional, we can now parse the command line. It is important to note that we are parsing the command line before we even think about interacting with the folder the user is in. The user could be initializing a new site, in which case there is no site or settings file to work with. We build up our basic compiler, then we defer future actions to the user.
+
+**INCLUDE COMMAND LINE CALLS**
+
+These lines of code parse the command line (which we will implement shortly). If a match was found, we call the appropriate task with the correct context. **EXPLAIN MORE ABOUT APPLY HERE**
+
+### The Command Line
+
+For the sake of science, we are going to build our own simple options parser for this compiler. You could simply use a library such as [optimist](https://github.com/substack/node-optimist) or [nopt](https://github.com/isaacs/nopt) which would alleviate a bit of complexity.
+
+**INCLUDE COMMAND LINE FULL CODE**
+
+There is a fair bit going on here 
+
+

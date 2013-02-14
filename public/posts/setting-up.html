@@ -16,11 +16,11 @@
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
     <!-- Styling and Profilin -->
-    <link href="/assets/css/vendor/tomorrow.css" type="text/css" rel="stylesheet"  />
-    <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css"  />
+    <link href="/kaw2k.github.com/public/assets/css/vendor/tomorrow.css" type="text/css" rel="stylesheet"  />
+    <link href="/kaw2k.github.com/public/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css"  />
 
     <!-- Modernizer -->
-    <script src="/assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js" ></script>
+    <script src="/kaw2k.github.com/public/assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js" ></script>
 </head>
 <body onload="prettyPrint()">
 <div class="container">
@@ -33,16 +33,16 @@
         <nav>
             <ul>
               <li >
-                  <a class="active" href="/" >Posts</a>
+                  <a class="active" href="/kaw2k.github.com/public/" >Posts</a>
               </li>
               <li >
-                  <a  href="/about" >About</a>
+                  <a  href="/kaw2k.github.com/public/about" >About</a>
               </li>
               <li class="logo">
-                  <a  href="/" >kaw.dev</a>
+                  <a  href="/kaw2k.github.com/public/" >kaw.dev</a>
               </li>
               <li >
-                  <a  href="/projects" >Projects</a>
+                  <a  href="/kaw2k.github.com/public/projects" >Projects</a>
               </li>
               <li >
                   <a  href="https:&#x2F;&#x2F;github.com&#x2F;kaw2k">GitHub</a>
@@ -63,7 +63,7 @@
             <time>February 23, 2013</time>
         </hgroup>
 
-        <p>This is the second post in a series about building a static site compiler in NodeJS. If you want to view the rest, visit the <a href="/tags/ssc" >Static Site Compiler</a> tag. This post will go through: setting up the project with NPM, go over the overall structure of the program, build a simple command line interface, and a task registration system.
+        <p>This is the second post in a series about building a static site compiler in NodeJS. If you want to view the rest, visit the <a href="/kaw2k.github.com/public/tags/ssc" >Static Site Compiler</a> tag. This post will go through: setting up the project with NPM, go over the overall structure of the program, build a simple command line interface, and a task registration system.
 
 </p>
 <p>If you want to view the finished code, you can grab it from the GitHub project. <strong>FIX: Bad repo and bad wording</strong>
@@ -97,6 +97,72 @@ console.log(&#39;Hello World! We are in the directory: &#39; + cwd)</code></pre>
 <pre><code>ln -s /usr/local/bin/ssc ./bin/ssc
 chmod 755 bin/ssc</code></pre>
 <p>After restarting your terminal you can run <code>ssc</code> and the compiler will run from the directory you are at.
+
+</p>
+<h2>Step 1: Initialization</h2>
+<p>Cool, so now we have the starting point for our application hooked up to our system. Now, let&#39;s start fleshing out the skeleton of the application some. Referring back to the <a href="/kaw2k.github.com/public/posts/planning-ssc" >planing post</a>, we are about to implement step 1, the initialization stage. We want to:
+
+</p>
+<ol>
+<li>Initialize the compiler</li>
+<li>Parse the command line options</li>
+<li>Read in the user settings</li>
+<li>Load in all the tasks that are required </li>
+<li>Set up our <code>site</code> object</li>
+<li>Execute the user specified command</li>
+</ol>
+<p>Just a quick note about the above steps. Our goal is to make this compiler <strong>simple</strong> and at the same time extendible. We want the end product to have a few built in tasks like building and deploying, however we do <em>not</em> want to limit ourselves to only these tasks. As a result, every task the compiler does will be broken into modules that can be replaced and tested individually. If you are not happy with the module for compiling markdown, you should be able to swap in your own custom implementation.  
+
+</p>
+<p>Now, let&#39;s make new folders for our tasks and libs, as well as a few new files. Remember, tasks can be hot swapped and libs are core functionality.
+
+</p>
+<p>  cd ~/Development/ssc
+  mkdir tasks
+  mkdir lib
+  touch lib/cli.js lib/task.js lib/settings.js lib/utils.js lib/ssc.js
+
+</p>
+<p>Notice how we made a <code>ssc.js</code> file. The file <code>ssc</code> in the <code>bin/</code> directory is the entry shell script to our application. It&#39;s purpose is to call our initialization file which kicks off out application (which is <code>ssc.js</code>). Open up this file and enter the following code.
+
+</p>
+<p><strong>CODE FOR SSC.JS</strong>
+
+</p>
+<p><strong>STEP TO INCLUDE OUR OTHER LIBRARIES</strong>
+
+</p>
+<p>The first few lines of code pull in our required libraries. We use underscore for some functional goodness, colors for pretty text output in terminals, and grunt.js&#39;s <a href="#">findup</a> file for recursive searching.
+
+</p>
+<p><strong>INCLUDE LIBRARY IMPORT</strong>
+
+</p>
+<p>Next, we start to define our compiler object. The compiler object will house the user settings, custom and core tasks, and the site object itself. Here, we are simply pulling in core libs that the compiler needs in order to function.
+
+</p>
+<p><strong>INCLUDE LIBS IMPORT</strong>
+
+</p>
+<p>With our basic compiler functional, we can now parse the command line. It is important to note that we are parsing the command line before we even think about interacting with the folder the user is in. The user could be initializing a new site, in which case there is no site or settings file to work with. We build up our basic compiler, then we defer future actions to the user.
+
+</p>
+<p><strong>INCLUDE COMMAND LINE CALLS</strong>
+
+</p>
+<p>These lines of code parse the command line (which we will implement shortly). If a match was found, we call the appropriate task with the correct context. <strong>EXPLAIN MORE ABOUT APPLY HERE</strong>
+
+</p>
+<h3>The Command Line</h3>
+<p>For the sake of science, we are going to build our own simple options parser for this compiler. You could simply use a library such as <a href="https://github.com/substack/node-optimist">optimist</a> or <a href="https://github.com/isaacs/nopt">nopt</a> which would alleviate a bit of complexity.
+
+</p>
+<p><strong>INCLUDE COMMAND LINE FULL CODE</strong>
+
+</p>
+<p>There is a fair bit going on here 
+
+
 </p>
 
 
@@ -104,7 +170,7 @@ chmod 755 bin/ssc</code></pre>
     
     <div class="post-navigation">
 
-            <a class="next" href="/posts&#x2F;ssc" >Introducing SSC.JS &rarr;</a>
+            <a class="next" href="/kaw2k.github.com/public/posts&#x2F;ssc" >Introducing SSC.JS &rarr;</a>
     </div>
 
     
@@ -132,17 +198,17 @@ var disqus_shortname = 'kawdev';
 <!-- jQuery -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script>
-    window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.8.3.min.js" ><\/script>')
+    window.jQuery || document.write('<script src="/kaw2k.github.com/public/assets/js/vendor/jquery-1.8.3.min.js" ><\/script>')
 </script>
 
 <!-- Press 'g' to show a debugging grid -->
-<script src="//assets/js/vendor/hashgrid.js" ></script>
+<script src="/kaw2k.github.com/public//assets/js/vendor/hashgrid.js" ></script>
 
 <!-- Prettify Dat Code -->
-<script src="/assets/js/vendor/prettify/prettify.js" ></script>
+<script src="/kaw2k.github.com/public/assets/js/vendor/prettify/prettify.js" ></script>
 
 <!-- Scripts -->
-<script src="/assets/js/main.js" ></script>
+<script src="/kaw2k.github.com/public/assets/js/main.js" ></script>
 <script> $('code, pre').addClass('prettyprint'); </script>
 
 

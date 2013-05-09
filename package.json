@@ -1,0 +1,13 @@
+{
+  "author": "Kevin Welcher",
+  "name": "kaw2k",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-watch": "~0.4.0",
+    "grunt-exec": "~0.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kaw2k/kaw2k.github.com.git"
+  }
+}

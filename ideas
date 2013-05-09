@@ -1,0 +1,15 @@
+- Backbone drag and drop with cocktail and jquery ui
+
+- Functions as objects, saving a safe value for functions you overwrite
+    var site = {};
+    var add = function(name, fun) {
+        fun.safe = site[name] ? site[name] : fun;
+        return site[name] = fun;
+    }
+
+- Regular Expression litterals with join and arrays
+    new RegExp([
+        'kevin',        // First name
+        '(.+)',         // Catch all
+        'welcher'       // Last name
+    ].join(''));

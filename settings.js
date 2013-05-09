@@ -3,7 +3,7 @@ site.settings = {
     outputPath: './public/',
 
     developmentUrl: '/kaw2k.github.com/public/',
-    productionUrl: '/',
+    productionUrl: '/kaw2k/public/',
 
     trimHTML: true
 }

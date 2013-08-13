@@ -1,0 +1,18 @@
+.container-narrow {
+  margin: 0 auto;
+  max-width: 700px;
+}
+
+
+pre {
+  /*background: #262626;*/
+}
+
+.home {
+  color: #ccc;
+}
+
+.home:hover {
+  color: #c84726;
+  text-decoration: none;
+}

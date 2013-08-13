@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Making Promises</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/zenburn.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.css">
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+
+        <!-- Typekit -->
+        <script type="text/javascript" src="//use.typekit.net/tlc4biu.js"></script>
+        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+    </head>
+    <body>
+
+      <div class="container-narrow">
+        <div class="site">
+          <h2>
+  <a href="/" class="home"><i class="icon-home"></i></a>
+  Making Promises
+</h2>
+
+<p class="meta">15 Aug 2013</p>
+
+<div class="post">
+<p>Perhaps you have started using jQuery or NodeJS and realized callbacks can get a bit unwieldy after a while. On the other hand, you may be a seasoned JS developer who has used Promise libraries such as <a href="#">Q</a> before but want to better understand what is going on under the hood. The goal for this post is to learn how promises work by making a super simple Promise library which you can use in your own projects. If you want to skip ahead, you can grab the final version of this code on <a href="https://github.com/kaw2k/Promise/blob/master/Promise.js">GitHub</a>.</p>
+
+<p>To start this post, we will explore some code that could greatly benefit from promises. The first example requires events to happen sequentially and the second example simply needs all the events to finish before proceeding.</p>
+
+<p>As you can see, each method of treating asynchronous events as sequential events has its own ugliness. We can help alleviate these problems with Promises!</p>
+
+<h3>Define the API</h3>
+
+<p>Before jumping into code we need to define our API. We are going to keep things fairly simply and only implement two public facing methods: <code>when</code> and <code>then</code>.</p>
+
+<p><code>then</code> deals with sequential tasks, you can think of it as executing one task <em>then</em> executing another task.  On the other hand, <code>when</code> tackles parallel tasks. Again, <em>when</em> all these tasks are done <em>then</em> do this action. You are actually using <code>then</code> to solve parallel issues!</p>
+
+<p>We will make a few other methods to help behind the scenes, for now we will focus on what the end user will see.</p>
+
+<h3>Setting Up the Bones</h3>
+
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">Promise</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">Promise</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{};</span>
+
+    <span class="c1">// ...</span>
+
+    <span class="k">return</span> <span class="nx">Promise</span><span class="p">;</span>
+<span class="p">})();</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">module</span><span class="p">)</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">Promise</span><span class="p">;</span>
+</code></pre></div>
+
+<p>To set the structure of the library, we are just assigning the value of a global variable <code>Promise</code> to the return result of the immediately executing anonymous function that has a return value of a constructor function. This closure will allow us <strong>TODO: FIX THIS</strong> a few private variables down the road.</p>
+
+<p>The last line simply checks if we are running in NodeJS. If we have a module, then set the export value of the file to be the Promise constructor. This allows other NodeJS apps to access our library.</p>
+
+<h3>Class and Instance methods</h3>
+
+<div class="highlight"><pre><code class="javascript"><span class="c1">// Class Methods</span>
+<span class="nx">Promise</span><span class="p">.</span><span class="nx">when</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{};</span>
+
+<span class="c1">// Instance Methods</span>
+<span class="nx">Promise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">then</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">onFulfilled</span><span class="p">,</span> <span class="nx">onRejected</span><span class="p">)</span> <span class="p">{};</span>
+<span class="nx">Promise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">resolve</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{};</span>
+<span class="nx">Promise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">reject</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{};</span>
+
+<span class="c1">// Private Methods</span>
+<span class="c1">// ...</span>
+</code></pre></div>
+
+<p>Here we are setting up the public interface to our Promise. We are making one instance method <code>when</code> which we call <em>directly</em> on the <code>Promise</code> object. We also have several instance methods, <code>then</code>, <code>resolve</code>, and <code>reject</code>.</p>
+
+<p>The subtle difference between the two is the scope of where we are attaching our methods. When we attach <code>when</code> to the <code>Promise</code> constructor, we are attaching a method to a <em>function</em>. When you invoke <code>new Promise()</code> the <code>Promise</code> constructor does not change. Furthermore, the scope of <code>when</code> is the <code>window</code>.  On the other hand, when we attach a function to the <code>prototype</code> of <code>Promise</code> we are giving future <code>Promise</code> instances access to the method.</p>
+
+<p>Since instances have their <code>this</code> value set appropriately, we can access the prototype which gives us access to <code>then</code>, <code>resolve</code>, and <code>reject</code>.</p>
+
+<h3>Then (v1)</h3>
+
+<p>The most simple place to get started is implementing a rudimentary <code>resolve</code> method. When a promise gets fulfilled, the promiser resolves the promise which allows all the callbacks on a promise to execute. The most basic implementation is:</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="nx">Promise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">resolve</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">onFulfilled</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">onFulfilled</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<p>Quite simple, all we are doing is setting our <code>data</code> attribute to be what the user passes in and call our success callback. If you run <code>node test</code> right now, nothing happens. We still need to actually add the callbacks to our promise object!</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="nx">Promise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">then</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">onFulfilled</span><span class="p">,</span> <span class="nx">onRejected</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">onFulfilled</span> <span class="o">=</span> <span class="nx">onFulfilled</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">onRejected</span> <span class="o">=</span> <span class="nx">onRejected</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">onFulfilled</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">onFulfilled</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<p><code>then</code> is how we register callbacks. Our implementation will take two parameters, a success and error callback. The conditional statement simply checks to see if we already have our data available at the time the <code>then</code> statement executes. Furthermore we check if we have a success callback (by the nature of having data we are not in an error state) and then call the success callback with our data. Finally, we return our instance so we can chain. Now we can pass tests such as.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="nx">time</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span> <span class="p">});</span>
+<span class="nx">time</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span> <span class="p">});</span>
+</code></pre></div>
+
+<p>Just with those two simple implementations, a simple promise interface is 60% there. Lets pick off a few low hanging fruit before we jump into chaining <code>then</code> statements. We can easily add an initialization step for our Promise objects.  Lets fill out the constructor function a little.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">Promise</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<p>If we pass anything to our promise object we then have an immediately fulfilled promise. Since <code>then</code> checks if <code>this.data</code> exists, we should be good to go writing code such as:</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="k">new</span> <span class="nx">Promise</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span> <span class="p">})</span>
+<span class="c1">//&gt; 1</span>
+</code></pre></div>
+
+<h3>Chaining With Then (v2)</h3>
+
+<p>With the simple setup out of the way we can start getting into a few more <strong>TODO: ADD LINK</strong> A+ specifications. Our goal is to be able to chain callbacks with <code>then</code>. These callbacks should forward their return to the next callback in the stack.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="nx">time</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">data</span> <span class="o">+</span> <span class="mi">10</span><span class="p">;</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">data</span> <span class="o">+</span> <span class="mi">10</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span> <span class="p">});</span>
+
+<span class="c1">//&gt; 30</span>
+</code></pre></div>
+
+<p>All we are aiming for is to push callbacks onto the stack of callbacks to execute when the promise returns. One cool feature we want to implement is to check if we return a promise in the callback chain and bake that promise into our callback chain. If you look at the example above, the entire callback chain will return after 10ms. The next example will produce the same result but return after 40ms.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="nx">time</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">time</span><span class="p">(</span><span class="nx">data</span> <span class="o">+</span> <span class="mi">10</span><span class="p">);</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">time</span><span class="p">(</span><span class="nx">data</span> <span class="o">+</span> <span class="mi">10</span><span class="p">);</span> <span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span> <span class="p">});</span>
+
+<span class="c1">//&gt; 30</span>
+</code></pre></div>
+
+<p>So how do we go about implementing this? First, we need to have some sort of stack to store these callbacks. We can implement this as an array in our constructor function.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">Promise</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">stack</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<p>The next step is to actually populate this stack with callbacks. To do this, we will first change the <code>then</code> method.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="nx">Promise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">then</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">onFulfilled</span><span class="p">,</span> <span class="nx">onRejected</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">stack</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+        <span class="nx">onFulfilled</span><span class="o">:</span> <span class="nx">onFulfilled</span><span class="p">,</span>
+        <span class="nx">onRejected</span><span class="o">:</span> <span class="nx">onRejected</span>
+    <span class="p">});</span>
+
+    <span class="c1">// if (this.data !== undefined &amp;&amp; this.onFulfilled) {</span>
+    <span class="c1">//     this.onFulfilled(this.data);</span>
+    <span class="c1">// }</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<p>Instead of imidiatly checking to see if <code>onFulfilled</code> exists, we need to examine the stack. To help manage some of the complexity of managing the stack, we will implenet a <code>next</code> method that sets up our next callback in the stack.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="kd">function</span> <span class="nx">next</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">stack</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">stack</span><span class="p">.</span><span class="nx">shift</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">onFulfilled</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">onFulfilled</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">onRejected</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">onRejected</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">executed</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>This function is rather simple at heart. We check to see if we have a callback on the stack. If one exists we pop it off and update our state accordingly.</p>
+
+<p>If you look closesly, you might think &quot;Wait, this wont work at all!&quot;. Notice how we are decalaring this function. We are not attaching this function to our prototype. This function is <em>only</em> available within the scope of our closure. That means that the scope of <code>this</code> is the window object and <em>not</em> the promise itself. As a result of this design choice, to call this method we will need to use <code>Function.prototype.call</code> in order to set the scope correctly.</p>
+
+<p>Why would we ever choose to do this? For one, it gives us the peace of mind to know that a malicious user can&#39;t (easily) trash our promises stack. Since this function is only available in the closure, a user can&#39;t manually call next or execute and send our promise into odd states.</p>
+
+<p>Now we can finish of the <code>then</code> method to call our new function.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="nx">Promise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">then</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">onFulfilled</span><span class="p">,</span> <span class="nx">onRejected</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">stack</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+        <span class="nx">onFulfilled</span><span class="o">:</span> <span class="nx">onFulfilled</span><span class="p">,</span>
+        <span class="nx">onRejected</span><span class="o">:</span> <span class="nx">onRejected</span>
+    <span class="p">});</span>
+
+    <span class="nx">next</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">onFulfilled</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">execute</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<p>Note here, we call <code>next.call(this);</code> which then gives it access to our promise and can therefore set its inner state.</p>
+
+<p>Similarly, we need to revisit <code>resolve</code>. Before we simply checked our internal state, now we need to make sure to call <code>next</code> before doing the same check.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="nx">Promise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">resolve</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+    <span class="nx">next</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">onFulfilled</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">onFulfilled</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<p>Looking closesly, we are spreading out our exicution logic between a variatey of functions and methods. Both the <code>then</code> and <code>resolve</code> methods execute <code>onFulfilled</code> callbacks. Spreading out our execution logic like this leads to unecicary complexity and heartache. We can  break out the execution of callbacks into a private <code>execute</code> function which will  encapsulate all the error checking to see if we have callbacks before trying to execute them.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="kd">function</span> <span class="nx">execute</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">next</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">executed</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">onFulfilled</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">onFulfilled</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Now, we can safely remove these checks from <code>then</code> and <code>resolve</code>.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="nx">Promise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">then</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">onFulfilled</span><span class="p">,</span> <span class="nx">onRejected</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">stack</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+        <span class="nx">onFulfilled</span><span class="o">:</span> <span class="nx">onFulfilled</span><span class="p">,</span>
+        <span class="nx">onRejected</span><span class="o">:</span> <span class="nx">onRejected</span>
+    <span class="p">});</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">execute</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">Promise</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">resolve</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+    <span class="nx">execute</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<p>Cool! Load everyhting up, run <code>node test</code> and we are right back where we started. Not too exciting, lets <em>actually</em> get chaining working.</p>
+
+<h3>Chainig With Then (v3)</h3>
+
+<p>With all our execution logic in one place, we simply need to modify <code>execute</code> to get chaining working correctly. Here is what we want to accomplish.</p>
+
+<ul>
+<li>Feed the return value of each callback into the paramater of the
+subsequent callback.</li>
+<li>If we return a promise, have the subsequent callback tap into the reolvement
+of the returned callback.</li>
+</ul>
+
+<p>With this in mind, we want to save the return value of <code>onFulfilled</code> and pass it
+into the next method of our callback stack.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="kd">function</span> <span class="nx">execute</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">next</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">executed</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">onFulfilled</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">executed</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">onFulfilled</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Here we are taking the return value and passing it to our own resolve method.  This is a divergence from the A+ Promise specifications, but it is fine for this demonstration.</p>
+
+<p>If you run the code as is, you will note we pass a few more test cases such as:</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="nx">time</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">data</span> <span class="o">+</span> <span class="mi">10</span><span class="p">;</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">data</span> <span class="o">+</span> <span class="mi">10</span><span class="p">;</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">//&gt; 30</span>
+</code></pre></div>
+
+<p>To get this work with returned promises, we need to inspec the value of the return type to see what we are dealing with. We can do this by testing the existance of the <code>then</code> method.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="kd">function</span> <span class="nx">execute</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">next</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">executed</span> <span class="o">&amp;&amp;</span> <span class="k">this</span><span class="p">.</span><span class="nx">onFulfilled</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">executed</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">onFulfilled</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">result</span> <span class="o">&amp;&amp;</span> <span class="nx">result</span><span class="p">.</span><span class="nx">then</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">result</span><span class="p">.</span><span class="nx">stack</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">stack</span><span class="p">;</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">stack</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>When we detect we have a promise, we simply transfer our stack to the new promise and clear our own stack. The new promise will have its own resolved state so we don&#39;t need to worry about transferring our data attribute. By clearing our own stack, we stop our own callback chain and let the new promise take over.</p>
+
+</div>
+
+
+<div class="header">
+  <h1 class="title"><a href="/">KawDev</a></h1>
+</div>
+
+
+
+
+        </div>
+      </div>
+
+    </body>
+</html>

@@ -2,6 +2,7 @@
   layout: post
   title: "For Loops and Scope Issues"
   category: js
+  published: false
 ---
 
 We want to explore in simple example how function scoping can be confusing for

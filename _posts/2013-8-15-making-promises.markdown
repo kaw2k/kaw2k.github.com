@@ -1,6 +1,7 @@
 ---
   layout: post
   title: "Making Promises"
+  published: false
 ---
 
 Perhaps you have started using jQuery or NodeJS and realized callbacks can get a bit unwieldy after a while. On the other hand, you may be a seasoned JS developer who has used Promise libraries such as [Q](#) before but want to better understand what is going on under the hood. The goal for this post is to learn how promises work by making a super simple Promise library which you can use in your own projects. If you want to skip ahead, you can grab the final version of this code on [GitHub](https://github.com/kaw2k/Promise/blob/master/Promise.js).
@@ -309,4 +310,154 @@ function execute() {
 {% endhighlight %}
 
 When we detect we have a promise, we simply transfer our stack to the new promise and clear our own stack. The new promise will have its own resolved state so we don't need to worry about transferring our data attribute. By clearing our own stack, we stop our own callback chain and let the new promise take over.
+
+At this point we are 99% the way there with chaining. If you notice, we have one outstanding bug left. This bug stems from the fact that it is possible to execute callbacks before `resolve` or `then` returns. If you look at the stack size during each tick of `execute` you don't get the full stack you may expect. Callbacks go in the stack and get popped off keeping the stack at 0 elements.
+
+To get around this, we will use the node method `nextTick`. This method allows us to call a function after the current event stack within the javascript interperater has cleared. Essentially, this will push the execution of the function to the *next* event cycle tha the javascript interperater executes.
+
+One issue we need to face is `nextTick` is not available in all browsers. To get around this, we will use a simple ternary to test if it is available. If it isn't we can simulate the same behaviour with `setTimeout`.
+
+{% highlight javascript %}
+var nextTick = (process)
+    ? process.nextTick
+    : function (fn) {setTimeout(fn, 0);};
+{% endhighlight %}
+
+Now, all we need to do is wrap the contents of `execute` in our custom `nextTick` method.
+
+{% highlight javascript %}
+function execute() {
+    nextTick(function() {
+        next.call(this);
+
+        if (!this.executed && this.onFulfilled) {
+            this.executed = true;
+            var result = this.onFulfilled(this.data);
+
+            if (result && result.then) {
+                result.stack = this.stack;
+                this.stack = [];
+            } else {
+                this.resolve(result);
+            }
+        }
+    }.bind(this));
+}
+{% endhighlight %}
+
+Looking at the above code, you will see that we had to bind the context of the inner anonymous function. By the time that function executes, we have lost our scope. Using bind allows us to use `this` instead of making a custom `self` variable.
+
+Run `node test` and we have passed all our `then` tests!
+
+### When
+
+Having completed `then`, `when` is relativly simple. You can think of `when` as spinning off and waiting for threads to complete. We have multiple promises that we are waiting for, and **when** these promises are resolved **then** execute this callback. At its core, `when` in of itself is a promise!
+
+With this in mind, our first steps to implementing `when` is to make a new promise object which we give back to the user.
+
+{% highlight javascript %}
+Promise.when = function () {
+    var promise = new Promise();
+
+    // content...
+
+    return promise;
+};
+{% endhighlight %}
+
+Now the question is, how do we want to interact with `when`? For starters, we want to accept promise tokens as arguments and return a promise that combines them all together. It would also be nice to give an array of promise tokens and have `when` splat them all for us. For example:
+
+{% highlight javascript %}
+var first = time(10);
+var second = time(20);
+var third = time(30);
+
+Promise.when(first, second, third).then(function(d1, d2, d3) {
+    console.log(d1, d2, d3);
+    //> 10, 20, 30
+});
+{% endhighlight %}
+
+This is a simple example of how we may use `when`. For each promise we give when, we get a parameter for our callback function. Why would we want to have an array be passable to `when`? Imagine you have a large list of files or servers and want to query them all...
+
+{% highlight javascript %}
+var serverUrls = [/* many urls... */];
+var promises = [];
+
+serverUrls.forEach(function(url) {
+    promises.push(get(url));
+});
+
+Promise.when(promises).then(function(/* data */) {
+    console.log(arguments);
+});
+{% endhighlight %}
+
+Really, that is just syntactic sugar, we could still achieve this result by calling `apply` on the `when` method. To get this sugar working, we will treat our arguments as an array from the start. If it turns out we got an array as our first argument, we just use that array instead.
+
+{% highlight javascript %}
+var args = Array.prototype.slice.call(arguments, 0);
+if (args.length === 1 && args[0] instanceof Array) {
+    args = args[0];
+}
+{% endhighlight %}
+
+Now that we have our list of promise tokens we can tie them together to one cohesive promise.
+
+{% highlight javascript %}
+function fail (){};
+function success (){};
+
+args.forEach(function (arg) {
+    arg.then(success, fail);
+});
+{% endhighlight %}
+
+Here we are doing several things. First we are making custom `success` and `fail` functions that our individual promises can use. These functions will dictate if the returned promise resolves or not.
+
+To actually join these promises together we will need another variable to keep track of how many promises have completed ed. Once all promises have completed we can then resolve. We will create this variable just under the creation of `args`.
+
+{% highlight javascript %}
+var args = Array.prototype.slice.call(arguments, 0);
+if (args.length === 1 && args[0] instanceof Array) {
+    args = args[0];
+}
+var count = args.length;
+{% endhighlight %}
+
+Now, all we need to do in `success` is decrement our count and call `resolve` on
+the promise if we are finished.
+
+{% highlight javascript %}
+function success (){
+    if (!--count) {
+        var promiseData = args.map(function (arg){
+            return arg.data;
+        });
+
+        promise.resolve(promiseData);
+    }
+};
+{% endhighlight %}
+
+We are using `map` here to lift the data out of each promise object. We then
+feed this array to the resolve method of our promise and call it a day.
+
+There is one issue though. In our `resolve` method, we take one value and assign `this.data` to that value. Subsequently, in our `execute` function we simply pass `this.data` to our `onFulfilled` callback. Ideally we would want to know if we are a `when` promise and use `apply` instead of just forwarding the data.
+
+To do this, we will introduce a boolean flag to dictate if we are a `when` promise and then opptionally apply the data to the callback.
+
+
+{% highlight javascript %}
+function success (){
+    if (!--count) {
+        var promiseData = args.map(function (arg){
+            return arg.data;
+        });
+
+        promise.resolve(promiseData);
+    }
+};
+{% endhighlight %}
+
 

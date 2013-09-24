@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>For Loops and Scope Issues</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Syntax Highlighting CSS -->
+        <link rel="stylesheet" href="/css/zenburn.css">
+
+        <!-- Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,800italic,400,800' rel='stylesheet' type='text/css'>
+
+        <!-- Custom CSS -->
+        <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+
+        <!--<link rel="stylesheet" href="http://basehold.it/24">-->
+
+    </head>
+    <body>
+
+      <div class="container-narrow">
+
+        <nav>
+            <h1 class="title"><a href="/">KawDev</a></h1>
+            <ul class="unstyled">
+                <li><a href="/scripting">Scripting</a></li>
+                <li><a href="/warbling">Warbling</a></li>
+                <li><a href="/cooking">Cooking</a></li>
+            </ul>
+        </nav>
+
+        <div class="site">
+          <h2>For Loops and Scope Issues</h2>
+
+<p class="meta">30 May 2013 <span class="muted">#scripting</span></p>
+
+<div class="post">
+<p>Today I wanted to tease out how function scoping can be confusing for new Javascript developers. We will also tackle a few ways in which we can work around this limitation. To demonstrate this, we will construct an simple use case: we have a list of objects and we want to programmatically generate a <code>toString</code> method for each of them. Look closely at the code and see if you can spot the error.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="c1">// Our test array</span>
+<span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Joe&#39;</span><span class="p">},</span>
+    <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Sally&#39;</span><span class="p">},</span>
+    <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Jim&#39;</span><span class="p">},</span>
+    <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Ann&#39;</span><span class="p">}</span>
+<span class="p">];</span>
+
+<span class="c1">// Method 1: Simple for loops</span>
+<span class="kd">function</span> <span class="nx">forLoop</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">toString</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="p">(</span><span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">name</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">forLoop</span><span class="p">();</span>
+<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">items</span><span class="p">[</span><span class="nx">x</span><span class="p">].</span><span class="nx">toString</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>If you run this code, you will get an error when you attempt to print out <code>items[i].name</code> in the <code>toString</code> method. Why is this? If we inspect the code further, we find out that <code>i</code> is 4, not quite what we expected. To make this code work, we could change the line to be:</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="kd">function</span> <span class="nx">forLoop</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">toString</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="p">(</span><span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">name</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>This still does not make the code work as desired, it only stops the code from crashing.</p>
+
+<p>Just a note on semantics, a shortcut to check if a property or method exists is to use the <code>&amp;&amp;</code> operator. If you wanted to check if a method exists before running it you could execute it safely via <code>someMethod &amp;&amp; someMethod()</code>.  We wrapped <code>items[i] &amp;&amp; items[i].name</code> in parentheses above to make sure we are executing the return value and not the boolean expression.</p>
+
+<p>Back to the code sample! The reason <code>i</code> is 4 and not 0-3 is due to functional scoping. In the <code>forLoop</code> method, the inner <code>for</code> loop does not have a scope context and therefore inner functions do not have a stack snapshot of the variables. This results in the <code>for</code> loop executing to completion and saving <code>i</code> as 4. When we call the <code>toString</code> method, our scope belongs to the <code>forLoop</code> method and not the <code>for</code> loop itself. The <code>forLoop</code> method sees <code>i</code> as 4, again, not our desired results.</p>
+
+<h2>Bind</h2>
+
+<p>To overcome this, we need to ensure we are making a subscope every time we need to access variables in a callback. Our first attempt will be to use the native <code>bind</code> method to set the scope of the <code>toString</code> method.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="kd">function</span> <span class="nx">forBind</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">toString</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">name</span><span class="p">);</span>
+        <span class="p">}.</span><span class="nx">bind</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">i</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>If you notice, the code looks very similar to what we had before. To emphasize the differences, here is a clean anonymous function signature.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="c1">// new</span>
+<span class="kd">function</span> <span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* code*/</span> <span class="p">}.</span><span class="nx">bind</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">i</span><span class="p">);</span>
+
+<span class="c1">// old</span>
+<span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="cm">/* code */</span> <span class="p">}</span>
+</code></pre></div>
+
+<p>We are giving the new function a parameter and we are then using <code>bind</code> to set the scope and initial parameters. Now, when we call <code>forBind</code> the functions scope is <code>null</code> and has a parameter <code>i</code> which is equal to the desired value.</p>
+
+<p>All this is due to the fact that <code>bind</code> is executing immediately during the execution of the <code>for</code> loop body, not during the callback. As a result, <code>i</code> is set correctly. Behind the scenes, <code>bind</code> takes the initial function, modifies it, and returns a copy with a new scope and parameter list. This new function is given to the <code>toString</code> method.</p>
+
+<p>The question comes up, why cant we just give the parameter <code>i</code> to the original function like so?</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="c1">// old</span>
+<span class="kd">function</span> <span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* code */</span> <span class="p">}</span>
+</code></pre></div>
+
+<p>Digging a little deeper, all this does is accepts a value from the <em>callers</em> scope, not from the scope of the original <code>for</code> loop.</p>
+
+<h2>Closures</h2>
+
+<p>Looking back at the original issue, we came into this mess by not having block scope. Instead we are stuck with functional scope, so to solve it we could make a new function to house our scope, this method is called using closures.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="kd">function</span> <span class="nx">forClosure</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">toString</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">name</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}(</span><span class="nx">i</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Allot is going on here, let&#39;s isolate the anonymous function&#39;s signature.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{};</span>
+<span class="p">}(</span><span class="nx">i</span><span class="p">))</span>
+</code></pre></div>
+
+<p>What in the world is this doing? Again, let&#39;s build up from scratch. In Javascript, we can make functions without names (which are called anonymous) with the syntax:</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="kd">function</span> <span class="p">()</span> <span class="p">{};</span>
+</code></pre></div>
+
+<p>The two most common use cases for these anonymous functions are for variable assignment and during method callbacks</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="c1">// variable assignment</span>
+<span class="kd">var</span> <span class="nx">someVariable</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{};</span>
+
+<span class="c1">// method callbacks</span>
+<span class="nx">someArray</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{});</span>
+</code></pre></div>
+
+<p>Once we have created this anonymous function, it sits there until it is called.  Typically we call these functions by their name or by calling the <code>var</code> which the function was assigned to. In some cases, we want these functions to be executed immediately upon creation, to accomplish this, we have the following syntax.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{})()</span>
+</code></pre></div>
+
+<p>We take the function, wrap it in parentheses, and then append another set of parentheses at the end. This ending parentheses set is the parameters to the inner function. For example...</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// name == &#39;Joe&#39;</span>
+    <span class="c1">// age == 10</span>
+<span class="p">})(</span><span class="s1">&#39;Joe&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+</code></pre></div>
+
+<p>Once the compiler goes over this function, it is immediately executed with the given parameters. Looking back at our original <code>forClosure</code> method we see that we have the inner function accept one parameter <code>i</code> and we immediately execute the function with the current value of <code>i</code>.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{};</span>
+<span class="p">}(</span><span class="nx">i</span><span class="p">))</span>
+</code></pre></div>
+
+<p>Cool, but why is there that <code>return</code> statement inside of the function body? Our original goal was to assign <code>toSring</code> to a function which we can call later to print out the name of the object. Since the function we provide to <code>toString</code> gets executed immediately, the return value of the function gets assigned to the <code>toString</code> property. Javascript functions automatically return <code>undefined</code> if no return value is explicitly given. To properly set <code>toString</code> to be a function, we have to <em>return</em> a function. Again, since the inner function has access to the parameters of the outer function, we now have a safe reference to <code>i</code>.</p>
+
+<h2>Native Functions</h2>
+
+<p>This is all terribly inconvenient, are we expected to use closures or bind every time we want to use callbacks? The short answer is no, we just need to adapt to a more functional style of coding over imperative coding.</p>
+
+<p>Instead of using <code>for</code> loops which are imperative we can use the native <code>forEach</code> function that Javascript arrays have access to.</p>
+
+<div class="highlight"><pre><code class="javascript"><span class="kd">function</span> <span class="nx">forEachLoop</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">items</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">list</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">item</span><span class="p">.</span><span class="nx">toString</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">index</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="nx">item</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Now, we rely on the Javascript interpreter to properly call this function for each of the items on the list. Since this is a function, we can safely rely on the scope to stay as we expect it to be. Much simpler than the previous two methods.</p>
+
+<h2>Wrap Up</h2>
+
+<p>After looking through all of this, you may ask yourself why would you ever not use the functional syntax?</p>
+
+<p>One reason is performance. Every time the <code>forEach</code> method is called, the interpreter has to do additional work setting up the stack to house our local variables. With the simple <code>for</code> loop, this is not needed and as a result will run faster. Some other reasons include code style preference. Some argue that it is much easier to read and comprehend the syntax of native <code>for</code> loops.</p>
+
+</div>
+
+
+
+
+        </div>
+
+      </div>
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-28018916-3']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+
+    </body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Fast Experimentation with Javascript</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Syntax Highlighting CSS -->
+        <link rel="stylesheet" href="/css/zenburn.css">
+
+        <!-- Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,800italic,400,800' rel='stylesheet' type='text/css'>
+
+        <!-- Custom CSS -->
+        <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+
+        <!--<link rel="stylesheet" href="http://basehold.it/24">-->
+
+    </head>
+    <body>
+
+      <div class="container-narrow">
+
+        <nav>
+            <h1 class="title"><a href="/">KawDev</a></h1>
+            <ul class="unstyled">
+                <li><a href="/scripting">Scripting</a></li>
+                <li><a href="/warbling">Warbling</a></li>
+                <li><a href="/cooking">Cooking</a></li>
+            </ul>
+        </nav>
+
+        <div class="site">
+          <h2>Fast Experimentation with Javascript</h2>
+
+<p class="meta">10 Feb 2013 <span class="muted">#scripting</span></p>
+
+<div class="post">
+<p>What do you do when you are in want of testing snippets of javascript? Jump into Chrome&#39;s DevTools? Perhaps NodeJS repl? A HTML playground online? JSBin has easily won my affections for exploring javascript.</p>
+
+<p>How often do you find yourself in the situation where you are reading or writing new code and you come across something you need to test to believe?</p>
+
+<p><strong>tl;dr</strong> <a href="http://jsbin.com/">JSBin</a> is my new best friend.</p>
+
+<p>Perhaps you would want to verify the scope of a function, or how a specific methods work. You wouldn&#39;t want to do this in the actual code you were working on as there is a good chance something else in the code would contaminate what you were testing. The ideal situation would be to enter a testing environment which you can quickly spin up, poke around inside objects, and quickly pull in frameworks you are using.</p>
+
+<h2>Options</h2>
+
+<p>I find myself in this situation almost every day. Every time you go to test something out, you have four basic options to experiment with.</p>
+
+<ul>
+<li>Browser dev tools</li>
+<li>NodeJS repl</li>
+<li>Directly in the editor</li>
+<li>WebDev playgrounds</li>
+</ul>
+
+<p>I have been down each of these paths, each have their benefits and drawbacks. What should you actually look for in a testing environment, how can we distinguish between these options?</p>
+
+<p><strong>Pulling in assets / frameworks.</strong> If we are working within a framework like jQuery, Backbone, etc, we should be able to pull them in quickly.</p>
+
+<p><strong>Speed: setup and execution.</strong> It should take only seconds to boot up your testing environment. Anything with high barriers to entry dissuades users from experimentation and can lead to using code without testing it first.</p>
+
+<p><strong>A console to poke around in.</strong> It helps when experimenting to dig deep into objects. Relying on logging is not ideal.</p>
+
+<p><strong>Easy (multiline) editing.</strong> For quick experiments you may not need a full fledged editor to test your code. Perhaps you want to test out a regular expression on various strings before using it. When you start to experiment with larger snippets of code, being restricted to single line edits is a pain.</p>
+
+<h2>Old Hats: Chrome</h2>
+
+<p>My old go to was to jump into the Chrome DevTools whenever I needed to experiment. Whenever I needed to test native functions, custom methods, regexs, or whatever, I would just jump into Chrome and have at it. This worked well for me, however it became cumbersome with larger experiments. Don&#39;t get me wrong here, the DevTools are <em>awesome</em>. <a href="http://addyosmani.com/blog/">Addy Osmani</a> and <a href="http://paulirish.com/">Paul Irish</a> frequently talk about how awesome the DevTools can be.</p>
+
+<p>You can easily test quick snippets of javascript in the console, poke around, and do anything to your hearts content. If you need to write a function and test it out, you can make a new source and reference it from the console easily enough. At the end of the day though, I feel the DevTools are suited for experimenting with and debugging full fledged web apps and not so much for quick experiments.</p>
+
+<h2>New(ish) Faces: JSBin</h2>
+
+<p>I tried out several HTML playgrounds in the past such as <a href="http://codepen.io/">CodePen</a> and <a href="http://jsfiddle.net/">JSFiddle</a>, however neither quite meet my needs. They both felt like they gave priority to HTML and CSS before javascript.</p>
+
+<p>Enter <a href="http://jsbin.com/">JSBin</a> v2.</p>
+
+<p>Holy cow, I really couldn&#39;t ask for (<em>much</em>) more. Slick interface, super quick to set up and import files, rudimentary tab completion, a console, smart indenting... In short, everything you need to quickly experiment with javascript.</p>
+
+<p><a class="jsbin-embed" href="http://jsbin.com/obarig/16/embed?javascript">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script></p>
+
+<p>With all this said, JSBin is not all smiles and fond looks. At the time of this writing, it has several bugs (features?) that are a bit annoying. For example, in the embedded example above, the output does not log to the embedded console. Instead, the browsers console captures the output. When you run the same code from the native website, the pages console captures the logs correctly.</p>
+
+<h2>Conclusion</h2>
+
+<p>I still jump into the DevTools for quick one liners, but <a href="http://jsbin.com/">JSBin</a> has won my affections. If you have another way of doing things, share it in the comments bellow.</p>
+
+</div>
+
+
+
+
+        </div>
+
+      </div>
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-28018916-3']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+
+    </body>
+</html>

@@ -1,6 +1,7 @@
 ---
-  title: "Fast Experimentation with Javascript"
-  layout: post
+title: "Fast Experimentation with Javascript"
+layout: post
+category: scripting
 ---
 
 What do you do when you are in want of testing snippets of javascript? Jump into Chrome's DevTools? Perhaps NodeJS repl? A HTML playground online? JSBin has easily won my affections for exploring javascript.

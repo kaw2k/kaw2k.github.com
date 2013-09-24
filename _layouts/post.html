@@ -2,17 +2,13 @@
 layout: default
 ---
 
-<h2>
-  <a href="/" class="home"><i class="icon-home"></i></a>
-  {{ page.title }}
-</h2>
+<h2>{{ page.title }}</h2>
 
-<p class="meta">{{ page.date | date_to_string }}</p>
+<p class="meta">{{ page.date | date_to_string }} <span class="muted">#{{ page.category }}</span></p>
 
 <div class="post">
 {{ content }}
 </div>
 
-{% include header.html %}
 
 {% include comments.html %}

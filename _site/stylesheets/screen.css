@@ -80,14 +80,14 @@ html {
 /* line 35, ../sass/screen.scss */
 .container-narrow {
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 770px;
   font-family: "Open Sans";
   color: #444;
 }
 
 /* line 42, ../sass/screen.scss */
 nav {
-  width: 200px;
+  width: 170px;
   float: left;
   text-align: right;
   padding-right: 48px;
@@ -160,7 +160,7 @@ h3 {
 }
 
 /* line 103, ../sass/screen.scss */
-p, pre, ul, ol, iframe {
+p, pre, ul, ol, iframe, hr {
   margin-top: 1.5em;
   padding-top: 0em;
   padding-bottom: 0em;
@@ -191,39 +191,71 @@ code {
 }
 
 /* line 128, ../sass/screen.scss */
-p, h1, h2, h3, ul, iframe {
-  /*padding-left: 2*$base-line-height;*/
-  /*padding-right: 2*$base-line-height;*/
-}
-
-/* line 133, ../sass/screen.scss */
 a {
   color: #4e9cb5;
   text-decoration: none;
 }
-/* line 136, ../sass/screen.scss */
+/* line 131, ../sass/screen.scss */
 a:hover {
   color: #4e9cb5;
   text-decoration: underline;
 }
 
-/* line 142, ../sass/screen.scss */
+/* line 137, ../sass/screen.scss */
 .muted {
   color: #ccc;
 }
 
-/* line 146, ../sass/screen.scss */
+/* line 141, ../sass/screen.scss */
 ul.unstyled {
   list-style-type: none;
 }
 
-/* line 150, ../sass/screen.scss */
+/* line 145, ../sass/screen.scss */
 ul {
   list-style-type: disc;
   list-style-position: inside;
 }
 
-/* line 155, ../sass/screen.scss */
+/* line 150, ../sass/screen.scss */
 em {
   font-style: italic;
+}
+
+/* line 154, ../sass/screen.scss */
+.home {
+  padding-top: 72px;
+}
+
+@media (max-width: 820px) {
+  /* line 165, ../sass/screen.scss */
+  .site {
+    padding: 24px;
+    padding-top: 0;
+    width: 100%;
+  }
+  /* line 171, ../sass/screen.scss */
+  .site .home {
+    padding-top: 0;
+  }
+
+  /* line 176, ../sass/screen.scss */
+  nav {
+    padding: 24px;
+    padding-bottom: 0;
+    width: 100%;
+  }
+  /* line 182, ../sass/screen.scss */
+  nav h1 {
+    float: left;
+  }
+  /* line 183, ../sass/screen.scss */
+  nav li {
+    float: right;
+    padding-left: 24px;
+    margin-top: 1.2em;
+    padding-top: 0em;
+    padding-bottom: 0em;
+    margin-bottom: 0em;
+  }
 }

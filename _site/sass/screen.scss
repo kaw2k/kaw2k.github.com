@@ -17,7 +17,7 @@ $h1-size: 32px;
 $h2-size: 26px;
 $h3-size: 20px;
 
-$total-width: 800px;
+$total-width: 770px;
 $content-width: 600px;
 $navigation-width: $total-width - $content-width;
 
@@ -100,7 +100,7 @@ h3 {
 }
 
 // Blocks
-p, pre, ul, ol, iframe {
+p, pre, ul, ol, iframe, hr {
   @include rhythm(1, 0, 0, 0);
 }
 
@@ -123,11 +123,6 @@ pre {
 code {
     background-color: #efefef;
     padding: 2px 3px;
-}
-
-p, h1, h2, h3, ul, iframe {
-    /*padding-left: 2*$base-line-height;*/
-    /*padding-right: 2*$base-line-height;*/
 }
 
 a {
@@ -156,19 +151,46 @@ em {
     font-style: italic;
 }
 
-
-// =============================================================================
-// Large Breakpoints
-// =============================================================================
+.home {
+    padding-top: 3 * $base-line-height;
+}
 
 
 // =============================================================================
 // Small Breakpoints
 // =============================================================================
+// Change the structure when we get bellow managable sizes
+@media (max-width: $total-width + 50)  {
 
+    .site {
+        padding: $base-line-height;
+        padding-top: 0;
 
+        width: 100%;
 
+        .home {
+            padding-top: 0;
+        }
+    }
 
+    nav {
+        padding: $base-line-height;
+        padding-bottom: 0;
+
+        width: 100%;
+
+        h1 { float: left; }
+        li {
+            float: right;
+            padding-left: $base-line-height;
+            @include rhythm(1, 0, 0, 0, $h3-size);
+        }
+    }
+
+}
+
+// Start scaling fonts
+@media (max-width: 600px)  {}
 
 
 

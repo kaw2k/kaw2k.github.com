@@ -1,0 +1,35 @@
+@import "compass/reset";
+@import "compass/typography/vertical_rhythm";
+
+@import "variables";
+
+@import "skin";
+
+@import "structure";
+
+section {
+    position: relative;
+
+    li {
+        text-indent: -1em;
+        padding-left: 1em;
+    }
+
+    .info {
+        position: absolute;
+        right: 0;
+        top: 0;
+        text-align: right;
+    }
+
+    & + section {
+        border-top: 1px solid #efefef;
+        .info {
+            top: $base-line-height;
+        }
+    }
+}
+
+aside li {
+    @include rhythm(1, 0, 0, 0);
+}

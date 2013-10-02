@@ -63,6 +63,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
+/*$primary: #327CCB;*/
+/* line 105, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.4/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
+html {
+  font-size: 100%;
+  line-height: 1.5em;
+}
+
 /* line 17, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -259,13 +266,6 @@ em {
   padding-top: 72px;
 }
 
-/*$primary: #327CCB;*/
-/* line 105, ../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.4/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
-html {
-  font-size: 100%;
-  line-height: 1.5em;
-}
-
 /* line 5, ../sass/_structure.scss */
 .container-narrow {
   margin: 0 auto;
@@ -299,35 +299,35 @@ nav a, aside a {
   margin-top: 0;
 }
 
-@media (max-width: 910px) {
-  /* line 15, ../sass/screen.scss */
-  .site {
-    padding: 24px;
-    padding-top: 0;
-    width: 100%;
-  }
-  /* line 21, ../sass/screen.scss */
-  .site .home {
-    padding-top: 0;
-  }
+/* line 10, ../sass/resume.scss */
+section {
+  position: relative;
+}
+/* line 13, ../sass/resume.scss */
+section li {
+  text-indent: -1em;
+  padding-left: 1em;
+}
+/* line 18, ../sass/resume.scss */
+section .info {
+  position: absolute;
+  right: 0;
+  top: 0;
+  text-align: right;
+}
+/* line 25, ../sass/resume.scss */
+section + section {
+  border-top: 1px solid #efefef;
+}
+/* line 27, ../sass/resume.scss */
+section + section .info {
+  top: 24px;
+}
 
-  /* line 26, ../sass/screen.scss */
-  nav {
-    padding: 24px;
-    padding-bottom: 0;
-    width: 100%;
-  }
-  /* line 32, ../sass/screen.scss */
-  nav h1 {
-    float: left;
-  }
-  /* line 33, ../sass/screen.scss */
-  nav li {
-    float: right;
-    padding-left: 24px;
-    margin-top: 1.2em;
-    padding-top: 0em;
-    padding-bottom: 0em;
-    margin-bottom: 0em;
-  }
+/* line 33, ../sass/resume.scss */
+aside li {
+  margin-top: 1.5em;
+  padding-top: 0em;
+  padding-bottom: 0em;
+  margin-bottom: 0em;
 }

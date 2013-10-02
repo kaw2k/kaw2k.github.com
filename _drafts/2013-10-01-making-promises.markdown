@@ -22,12 +22,12 @@ We will make a few other methods to help behind the scenes, for now we will focu
 
 {% highlight javascript %}
 var Promise = (function (undefined) {
-    // Constructor -------------------------------------------------------------
-    var Promise = function() {};
+    // Constructor
+    var Promise = function (value) {};
 
     // ...
 
-    // Expose the promise ------------------------------------------------------
+    // Expose the promise
     return Promise;
 })();
 
@@ -41,14 +41,14 @@ The last line simply checks if we are running in NodeJS. If we have a module, th
 ### Class and Instance methods
 
 {% highlight javascript %}
-// Class Method ------------------------------------------------------------
+// Class Method
 Promise.when = function () {};
 
-// Instance Methods --------------------------------------------------------
+// Instance Methods
 Promise.prototype.then = function(onFulfilled, onRejected) {};
 Promise.prototype.resolve = function(value) {};
 
-// Private Functions -------------------------------------------------------
+// Private Functions
 {% endhighlight %}
 
 Here we are setting up the public interface to our Promise. We are making one instance method `when` which we call *directly* on the `Promise` object. We also have several instance methods, `then`, `resolve`, and `reject`.
@@ -454,15 +454,6 @@ To do this, we will introduce a boolean flag to dictate if we are a `when` promi
 
 
 {% highlight javascript %}
-function success (){
-    if (!--count) {
-        var promiseData = args.map(function (arg){
-            return arg.data;
-        });
-
-        promise.resolve(promiseData);
-    }
-};
 {% endhighlight %}
 
 

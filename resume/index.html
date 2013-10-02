@@ -1,3 +1,192 @@
 ---
-layout: default
 ---
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Resume</title>
+        <meta name="viewport" content="width=device-width">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,800italic,400,800' rel='stylesheet' type='text/css'>
+        <link href="/stylesheets/resume.css" media="screen, projection, print" rel="stylesheet" type="text/css" />
+        <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script>
+            $(function() {
+                $('.tldr').hide();
+
+                $('.skim, .details').click(function() {
+                    $(this).addClass('active');
+                    if($(this).hasClass('skim')) {
+                        $('.details').removeClass('active');
+                        $('.full').hide();
+                        $('.tldr').show();
+                    } else {
+                        $('.skim').removeClass('active');
+                        $('.full').show();
+                        $('.tldr').hide();
+                    }
+
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+
+      <div class="container-narrow">
+
+        <aside>
+            <h1 class="title"><a href="/">KawDev</a></h1>
+            <ul class="unstyled">
+                <li class="brevity">
+                    <a class="skim" href="#">TLDR</a> / <a class="active details" href="#">Details</a>
+                </li>
+                <li>
+                    <strong>Contact</strong><br>
+                    <a href="mailto:kaw2k@virginia.edu">kaw2k@virginia.edu</a><br>
+                    (703)298-2146<br>
+                    223 Collonade Drive, Apt 19<br>
+                    Charlottesville VA, 22903
+                </li>
+                <li>
+                    <strong>Languages</strong><br>
+                    <span class="full">Javascript<br> HTML / CSS<br> Objective C<br> (Inquire for more)</span>
+                    <span class="tldr">Languages are tools, I am passionate about the web and its languages but do not limit myself to its ecosystem.</span>
+                </li>
+                <li>
+                    <strong>Interests</strong><br>
+                    Designing large web applications, functional javascript, <a href="http://kaw2k.github.io/cooking-recipes/">vegetarian cooking</a>, emojis, <a href="https://github.com/kaw2k/IRC-Post-Bot">IRC</a> <a href="https://github.com/kaw2k/puppybot">Bots</a>, and <a href="http://www.flickr.com/photos/kaw2k/">photography</a>
+                </li>
+            </ul>
+        </aside>
+
+        <div class="site">
+
+            <h2>Kevin Welcher</h2>
+
+            <section>
+                <h3><a href="http://www.willowtreeapps.com/">WillowTree Apps</a></h3>
+                <em>Web Application Developer</em>
+                 <div class="info">
+                    <span class="place">Charlottesville, VA</span><br>
+                    <span class="time">Spring 2013 - Present</span>
+                 </div>
+                 <p class="tldr">
+                    WillowTree has given me the chance to architect large web applications from scratch, quickly iterate based on what works, and employee the knowledge in subsequent projects. The quick iterations the company encourages growth and honing of skills
+                 </p>
+                 <ul class="full">
+                    <li>Utilized Backbone and Marionette to build interactive single page applications</li>
+                    <li>Employed the Chrome Dev Tools to continually monitor performance and memory</li>
+                    <li>Created IRC bots to increase the quality of life for fellow employees</li>
+                 </ul>
+            </section>
+
+
+
+            <section>
+                <h3><a href="https://www.facebook.com/ChatterSports">Chatter Sports LLC</a></h3>
+                <em>Lead (Web) Game Developer</em>
+                 <div class="info">
+                    <span class="place">Charlottesville, VA</span><br>
+                    <span class="time">Spring 2012 - Winter 2013</span>
+                 </div>
+                 <p class="tldr">I took this opportunity to see what the business development side of a startup was like. Javascript game development coupled with always keeping an ear to performance with the Chrome Dev Tools</p>
+                 <ul class="full">
+                     <li>Joined founding members as the initial developer, identified appropriate technical stack with focus on creating highly scalable games</li>
+                     <li>Implemented leading technologies to enhance the user experience, increase the company’s value proposition to investors, and prepare for the company’s future mobile strategy</li>
+                     <li>Interviewed and mentored subsequent developers for the team</li>
+                     <li>Completed prototype two weeks ahead of schedule progressing beyond initial specifications for a more robust demo</li>
+                     <li>Participated in Darden Business School Startup Incubator; worked directly with team of MBAs, experienced entrepreneurs and advisors to learn fundamental business concepts and startup lifecycle</li>
+                 </ul>
+            </section>
+
+
+
+            <section>
+                <h3><a href="http://www.groundsforargument.org/drupal/welcome">Redschoolhouse.org</a></h3>
+                <em>Web Designer / Developer / Sys Admin</em>
+                 <div class="info">
+                    <span class="place">Charlottesville, VA</span><br>
+                    <span class="time">Summer 2011 - Spring 2013</span>
+                 </div>
+                 <p class="tldr">
+                    My stomping ground for web development. Heavy jQuery work to create custom widgets, site optimizations to speed up page loads, tooling work to speed up content entry
+                 </p>
+                 <ul class="full">
+                    <li>Improved page responsiveness of web-based content management system by replacing hard page refreshes with AJAX calls and other client side optimizations</li>
+                    <li>Improved user experience by redesigning layouts with an emphasis on ease of use and simplifying navigation</li>
+                    <li>Grew registered user pool by 16% up to 2,900 by developing dynamic, extensible widgets that non-technical content contributors utilize to engage users</li>
+                    <li>Provided real-time support to five major Universities presently using the site offering technical support and providing real-time troubleshooting to non-technical client staff</li>
+                 </ul>
+            </section>
+
+
+
+            <section>
+                <h3>Freelancer</h3>
+                <em>Web Designer / iOS Developer</em>
+                 <div class="info">
+                    <span class="place">Charlottesville, VA</span><br>
+                    <span class="time">Summer 2011 - Present</span>
+                 </div>
+                 <p class="tldr">
+                    To stay sharp and keep learning, I freelance iOS development in my off hours
+                 </p>
+                 <ul class="full">
+                     <li>Worked with 3 clients to develop applications ranging from custom MVC driven web applications to a native iPad application completing each project on-time and earning recommendation for clients towards future work</li>
+                     <li>Hosted and developed in person and online training programs for both technical and non-technical users about Drupal</li>
+                 </ul>
+            </section>
+
+
+
+            <section>
+                <h3><a href="http://www.virginia.edu/">University of Virginia</a></h3>
+                <em>Bachelor of Science in Computer Science</em>
+                <div class="info">
+                    <span class="place">Charlottesville, VA</span><br>
+                    <span class="time">Fall 2007 - Spring 2011</span>
+                </div>
+                <p class="tldr">
+                    UVA taught me how to work in groups and to actively question everything (inside and outside of CS). This questioning mentality coupled with a desire to always learn guided me to the ever ephemeral world of web development
+                </p>
+                <ul class="full">
+                    <li>Major GPA: 3.3</li>
+                    <li>Finished 6th out of more than 120 teams in the International Collegiate Programing Competition (ICPC); Worked in a small team to solve algorithmic, object orientated, and IO problems in a time sensitive environment</li>
+                </ul>
+            </section>
+
+
+
+            <section>
+                <h3>Talks / Writings</h3>
+                <ul>
+                    <li>
+                        CV.js Meetup: <a href="http://kaw2k.github.io/posts/meetup-post/">Talk Functional Javascript</a>
+                        <span class="pull-right">Summer 2013</span>
+                    </li>
+                    <li>
+                        Posts about (mostly) Javascript: <a href="http://kaw2k.github.io/scripting/">Blog</a>
+                        <span class="pull-right">Winter 2012</span>
+                    </li>
+                </ul>
+            </section>
+
+
+
+        </div>
+      </div>
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-28018916-3']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+
+    </body>
+</html>

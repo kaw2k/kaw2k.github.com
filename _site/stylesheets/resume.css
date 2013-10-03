@@ -331,3 +331,49 @@ aside li {
   padding-bottom: 0em;
   margin-bottom: 0em;
 }
+
+@media (max-width: 910px) {
+  /* line 39, ../sass/resume.scss */
+  .site {
+    padding: 24px;
+    padding-top: 0;
+    width: 100%;
+  }
+  /* line 45, ../sass/resume.scss */
+  .site .home {
+    padding-top: 0;
+  }
+
+  /* line 50, ../sass/resume.scss */
+  h2 {
+    text-align: center;
+  }
+
+  /* line 54, ../sass/resume.scss */
+  aside {
+    padding: 24px;
+    padding-bottom: 0;
+    width: 100%;
+  }
+  /* line 59, ../sass/resume.scss */
+  aside h1, aside .brevity {
+    display: none;
+  }
+  /* line 61, ../sass/resume.scss */
+  aside h1 {
+    text-align: center;
+  }
+  /* line 65, ../sass/resume.scss */
+  aside li {
+    font-size: 0.875em;
+    line-height: 1.71429em;
+    width: 33%;
+    float: left;
+    text-align: center;
+    padding-left: 24px;
+    margin-top: 1.71429em;
+    padding-top: 0em;
+    padding-bottom: 0em;
+    margin-bottom: 0em;
+  }
+}

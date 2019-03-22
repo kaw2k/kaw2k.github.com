@@ -1,17 +1,252 @@
----
-layout: home
-title: KawDev
----
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Kevin Welcher's Resume</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+  </head>
 
-<div id="home">
-  <ul class="posts unstyled">
-    {% for post in site.posts %}
-    <li>
-      <a href="{{ post.url }}">{{ post.title }}</a>
-      <span class="pull-right">{{ post.date | date: "%B %d, %Y" }}</span>
-    </li>
-    {% endfor %}
-  </ul>
+  <body>
+    <div class="resume-details">
+      <h1>Kevin Welcher</h1>
 
-  {% include about.html %}
-</div>
+      <section class="resume-section">
+        <header class="resume-section__header">
+          <div>
+            <h2>In Brief</h2>
+          </div>
+        </header>
+        <div class="resume-section__long-description">
+          <p>
+            I firmly believe amazing products start with cohesive teams, this is what I enjoy creating. I approach building things by uplifting people, leading through curiosity, empathy, and passion. ​It could be working with design to ensure our product is accessible or smoothing the build pipeline to empower QA. Ultimately software is for people, and if we lose sight of that while creating it then it will be lost when consumers use it. The tools and technologies I listed below are starting points​, you need much more than that to run successful projects.
+          </p>
+        </div>
+      </section>
+
+      <section class="resume-section">
+        <header class="resume-section__header">
+          <div>
+            <h2><a href="https://willowtreeapps.com/">WillowTree</a></h2>
+            <em>Senior Software Engineer</em>
+          </div>
+          <div class="resume-section__location">
+            <p>Charlottesville, VA</p>
+            <p>March 2013 - Present</p>
+          </div>
+        </header>
+        <ul class="resume-section__long-description">
+          <li>Shipped and lead applications with variegated needs (video streaming, consumer portals, offline web applications, business tooling) on teams ranging from three to thirty people.</li>
+          <li>Facilitated leadership workshops and seminars across various roles in the organization teaching: coaching, feedback, difficult conversations, and more.</li>
+          <li>Ample experience and leadership in all stages of the software life cycle.</li>
+          <li>Guided the web platform in best practices for ReactJS (and friends), web fundamentals, SEO, and accessibility.</li>
+        </ul>
+      </section>
+
+      <section class="resume-section">
+        <header class="resume-section__header">
+          <div>
+            <h2>Consulting</h2>
+            <em>Web Developer / Designer / Ops</em>
+          </div>
+          <div class="resume-section__location">
+            <p>Charlottesville, VA</p>
+            <p>May 2011 - Present</p>
+          </div>
+        </header>
+        <ul class="resume-section__long-description">
+          <li>Developed social games in <a href="https://ilab.virginia.edu/incubator/">Darden's i.Lab incubator program.</a></li>
+          <li>Developed educational tools and games for <a href="https://news.virginia.edu/content/little-red-schoolhouse-opens-online-campus">Little Red Schoolhouse at UVA</a></li>
+          <li>Various open source projects like <a href="https://www.npmjs.com/package/react-formable">react-formable</a></li>
+        </ul>
+      </section>
+
+      <section class="resume-section">
+        <header class="resume-section__header">
+          <div>
+            <h2><a href="https://virginia.edu"> Education: University of Virginia </a></h2>
+            <em>Bachelor of Science in Computer Science</em>
+          </div>
+          <div class="resume-section__location">
+            <p>Charlottesville, VA</p>
+            <p>Fall 2007 - Spring 2011</p>
+          </div>
+        </header>
+      </section>
+    </div>
+
+    <aside class="resume-aside">
+      <section class="resume-section">
+        <header class="resume-section__header">
+          <div>
+            <h2>Contact</h2>
+          </div>
+        </header>
+        <ul>
+          <li>
+            <a href="mailto:kevin.welcher@gmail.com">kevin.welcher@gmail.com</a>
+          </li>
+          <li>
+            <a href="tel:703-298-2146">(703) 298-2146</a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="resume-section">
+        <header class="resume-section__header">
+          <div>
+            <h2>Languages</h2>
+          </div>
+        </header>
+        <ul>
+          <li>Typescript/Javascript</li>
+          <li>HTML</li>
+          <li>(S)CSS</li>
+        </ul>
+      </section>
+
+      <section class="resume-section">
+        <header class="resume-section__header">
+          <div>
+            <h2>Technologies</h2>
+          </div>
+        </header>
+        <ul>
+          <li>React</li>
+          <li>Backbone</li>
+          <li>Angular</li>
+        </ul>
+      </section>
+
+      <section class="resume-section">
+        <header class="resume-section__header">
+          <div>
+            <h2>Interests</h2>
+          </div>
+        </header>
+        <ul>
+          <li><a href="https://spiders.fun">Board games</a></li>
+          <li><a href="https://photos.app.goo.gl/kQA38QvUtQM6Rx4R8">Doodling</a></li>
+          <li><a href="https://medium.com/@kaw2k"> Occasionally writing </a></li>
+        </ul>
+      </section>
+    </aside>
+
+    <style>
+      /* ======================
+               Variables
+         ====================== */
+      :root {
+        --padding: 1.5em;
+      }
+
+      /* ======================
+          Global Base Styles
+         ====================== */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: 'Open Sans', sans-serif;
+        display: block;
+        line-height: 1.5;
+        margin: 0 auto;
+        padding: var(--padding);
+        max-width: 960px;
+        min-width: 650px;
+      }
+
+      /* ======================
+               Typography
+         ====================== */
+      h1 {
+        font-size: 1.5em;
+        text-align: center;
+      }
+      h2 {
+        font-size: 1.25em;
+      }
+      h3 {
+        font-size: 1.1em;
+      }
+      a {
+        text-decoration: none;
+        color: #4e9cb5;
+      }
+
+      /* ======================
+               Section
+         ====================== */
+      /* Base styles */
+      .resume-section {
+        border-top: 1px solid #eee;
+        padding-top: var(--padding);
+        margin-top: var(--padding);
+      }
+      .resume-section:first-of-type {
+        border-top: none;
+        margin-top: 0;
+      }
+
+      /* Header styles */
+      .resume-section__header {
+        display: flex;
+      }
+      .resume-section__location {
+        margin-left: auto;
+        text-align: right;
+      }
+      .resume-section__short-description,
+      .resume-section__long-description {
+        margin-top: calc(var(--padding) / 2);
+      }
+
+      /* ======================
+               Sidebar
+         ====================== */
+      /* Base styles */
+      .resume-aside {
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+        padding-top: var(--padding);
+        margin-top: var(--padding);
+        border-top: 1px solid #eee;
+      }
+      .resume-aside li {
+        list-style: none;
+      }
+      .resume-aside .resume-section {
+        border: 0;
+        padding-top: 0;
+        margin-top: 0;
+      }
+      .resume-aside .resume-section__header {
+        display: block;
+      }
+
+      /* ======================
+               Resume
+         ====================== */
+      .resume-details .resume-section ul {
+        padding-left: var(--padding);
+      }
+      .resume-details .resume-section li {
+        list-style: disc outside none;
+      }
+    </style>
+
+    <style type="text/css" media="print">
+      /* Remove decorations from printing */
+      @page {
+        size: auto;
+        margin: 0;
+      }
+    </style>
+  </body>
+</html>
